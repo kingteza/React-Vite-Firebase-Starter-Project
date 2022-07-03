@@ -1,0 +1,22 @@
+{
+  "str": {
+    "delete": "Delete",
+    "no": "No",
+    "goBack": "Go Back",
+    "new": "New",
+    "update": "Update"
+  },
+  "qus": {
+    "doYouWantToDelete": "Do you want to delete?"
+  },
+  "message": {
+    "fileUploadMessage2": "Click to upload"
+  },
+  "err": {
+    "needPermissionToAccessTheResource": "You need permission to access this resource",
+    "notFound": "Not Found",
+    "validation": {
+      "required": "Required"
+    }
+  }
+}

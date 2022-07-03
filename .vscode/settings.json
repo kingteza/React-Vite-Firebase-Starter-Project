@@ -1,0 +1,5 @@
+{
+  "cSpell.words": ["antd", "Sider"],
+  "typescript.preferences.quoteStyle": "single",
+  "prettier.singleQuote": true
+}

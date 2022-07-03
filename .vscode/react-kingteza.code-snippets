@@ -1,0 +1,48 @@
+{
+  "useCallBack": {
+    "prefix": "useCallBack",
+    "body": [
+      "const ${1:} = useCallback(",
+      "    () => {",
+      "      ${2:}",
+      "    },",
+      "    [${3:}],",
+      "  )"
+    ],
+    "description": ""
+  },
+  "useNavigate": {
+    "prefix": "useNavigate()",
+
+    "body": ["const navigate = useNavigate${1:}();"],
+    "description": "Use Navigation",
+    "scope": "typescriptreact"
+  },
+  "useTranslation": {
+    "prefix": "useTranslation()",
+
+    "body": ["const { t } = useTranslation${1:}()\n"],
+    "description": "Use Navigation",
+    "scope": "typescriptreact"
+  },
+  "dispatch": {
+    "prefix": "useAppDispatch()",
+
+    "body": ["const dispatch = useAppDispatch${1:}();\n"],
+    "description": "Use Navigation",
+    "scope": "typescriptreact"
+  },
+  "useAppSelector": {
+    "prefix": "useAppSelector()",
+
+    "body": ["const state = useAppSelector${1:}((s) => ${2:});\n"],
+    "description": "Use Navigation",
+    "scope": "typescriptreact"
+  },
+  "useOrgContext": {
+    "prefix": "useOrgContext()",
+    "body": ["const { orgId } = useOrgContext${1:}();\n"],
+    "description": "Use Navigation",
+    "scope": "typescriptreact"
+  }
+}

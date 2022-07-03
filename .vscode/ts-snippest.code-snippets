@@ -1,0 +1,11 @@
+{
+    "genInterface": {
+        "prefix": "genInterface",
+        "description": "Generate interface",
+        "body": [
+            "export default interface ${1:$TM_FILENAME_BASE} {",
+            "\t${2:}",
+            "}"
+        ]
+    }
+}
