@@ -3,16 +3,11 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { withCurrentUserContext } from 'context/UserContext';
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+enum ErrorCode {
+  EMAIL_ALREADY_EXIST = 'EMAIL_ALREADY_EXIST',
+  UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
+  CUSTOMER_ID_MUST_BE_SETUP_BY_ADMIN = 'CUSTOMER_ID_MUST_BE_SETUP_BY_ADMIN',
+  CONNECTION_ID_MUST_BE_SETUP_BY_ADMIN = 'CONNECTION_ID_MUST_BE_SETUP_BY_ADMIN',
+}
 
-const VenueLayout = () => {
-  return (
-    <main>
-      <Outlet />
-    </main>
-  );
-};
-
-export default withCurrentUserContext(VenueLayout);
+export default ErrorCode;

@@ -1,5 +1,6 @@
 {
   "str": {
+    "login": "Login",
     "delete": "Delete",
     "no": "No",
     "goBack": "Go Back",
@@ -10,13 +11,36 @@
     "doYouWantToDelete": "Do you want to delete?"
   },
   "message": {
-    "fileUploadMessage2": "Click to upload"
+    "success": {
+      "login": "Logged in Successfully",
+      "saved": "Saved Successfully",
+      "deleted": "Deleted Successfully",
+      "updated": "Updated Successfully",
+      "successSwitchToGRN": "Successfully Switched the purchase order to purchase invoice."
+    },
+    "loading": {
+      "saving": "Saving",
+      "deleting": "Deleting",
+      "updating": "Updating"
+    },
+    "fileUploadMessage1": "Drag file here or ",
+    "fileUploadMessage2": "Click to Upload"
   },
   "err": {
+    "save": "An Error occurred while saving the data",
+    "delete": "An Error occurred while deleting the data",
+    "update": "An Error occurred while updating the data",
+    "getting_all_data": "An Error occurred while getting the data",
+    "invalidCredential": "The Email or Password is Invalid",
     "needPermissionToAccessTheResource": "You need permission to access this resource",
     "notFound": "Not Found",
     "validation": {
       "required": "Required"
+    },
+    "code": {
+      "auth/invalid-credential": "Invalid username or password",
+      "auth/user-not-found": "Invalid username or password",
+      "auth/wrong-password": "Invalid username or password"
     }
   }
 }

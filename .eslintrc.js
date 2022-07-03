@@ -35,7 +35,7 @@ module.exports = {
     'no-unused-vars': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'prettier/prettier': ['error', {}],
+    'prettier/prettier': ['off', {}],
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
