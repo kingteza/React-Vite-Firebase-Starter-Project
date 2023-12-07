@@ -1,5 +1,7 @@
 {
   "str": {
+    "email": "Email",
+    "password": "Password",
     "dashboard": "Dashboard",
     "language": "Language",
     "logout": "Logout",
