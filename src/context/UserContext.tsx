@@ -24,11 +24,11 @@ export const useUserContext = () => useContext(UserContext);
 export const withCurrentUserContext = (Component) => (props) => {
   const [loading, setLoading] = useState(true);
 
-  const [currentUser, setCurrentUser] = useState<CurrentUser>();
+  const [currentUser, setCurrentUser] = useState<CurrentUser>({} as any);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
     // return onAuthStateChanged((user: any) => {
     //   setLoading(false);
     //   if (user) {

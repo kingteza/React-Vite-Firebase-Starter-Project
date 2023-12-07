@@ -1,11 +1,284 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import 'bootstrap-css-only/css/bootstrap.min.css';
+@import './style/index.css';
+
+button,
+input[type='button'] {
+  outline: none !important;
+}
+button::-moz-focus-inner,
+input[type='button']::-moz-focus-inner {
+  border: 0 !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+/*
+  Accessibility (A11Y)
+  Don't forget! User accessibility is important
+*/
+button:focus,
+input[type='button']:focus {
+  /* your custom focused styles here */
+}
+.center {
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+@media only screen and (max-width: 6000px) {
+  .login-screen-width {
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  /*Big smartphones [426px -> 600px]*/
+  .login-screen-width {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 425px) {
+  /*Small smartphones [325px -> 425px]*/
+  .login-screen-width {
+    width: 75%;
+  }
+}
+
+main {
+  padding: 1rem !important;
+}
+
+.ant-layout-content main {
+  padding: 0 !important;
+}
+
+/* Override */
+
+.no-collapse-header .ant-collapse-header {
+  display: none !important;
+}
+
+.no-collapse-header .ant-collapse-content-box {
+  padding: 0 !important;
+}
+
+.w-100 > .ant-space-item {
+  width: 100%;
+}
+
+.min-width-descriptions-20 .ant-descriptions-item-label {
+  width: 20%;
+}
+
+.min-width-descriptions-10 .ant-descriptions-item-label {
+  width: 10%;
+}
+
+.min-width-descriptions-90 .ant-descriptions-item-label {
+  width: 90%;
+}
+
+.no-overflow .ant-tabs-content-holder {
+  overflow-y: overlay;
+}
+
+.ant-tabs-content-holder {
+  overflow-y: auto;
+}
+
+.sidebar {
+  height: 100vh;
+  margin-right: 24px;
+}
+.navbar {
+  /* background-color: white; */
+  padding-left: 2rem;
+  /* padding-top: 1rem;
+  padding-bottom: 1rem; */
+}
+@media (min-width: 992px) {
+  .menu {
+    display: none;
+  }
+}
+.logo {
+  height: 32px;
+  margin-left: 1rem;
+}
+/* To center icon vertically */
+svg {
+  vertical-align: baseline;
+}
+
+.max-width {
+  width: 100% !important;
+}
+
+.half-max-width {
+  width: 50% !important;
+}
+
+.flex-grow {
+  flex-grow: 1 !important;
+}
+
+.button-right-margin {
+  margin-right: 16px;
+}
+
+.max-height {
+  height: 100%;
+}
+
+.max-height-vh {
+  height: 100vh !important;
+}
+
+.minus-title-bar-height {
+  height: 100% !important;
+  margin-top: 64px;
+}
+
+.minus-title-bar-height-w {
+  height: calc(100% - 64px) !important;
+  margin-top: 64px;
+}
+
+.light-text {
+  color: white !important;
+}
+
+.v-center-text {
+  vertical-align: middle;
+}
+
+.ant-form-item-label {
+  padding: 8px 0 0 0 !important;
+}
+
+.dw-form {
+  width: 40% !important;
+}
+
+.site-layout-background-invert {
+  /* background-color: #fff !important; */
+}
+
+.screen-m-default {
+  padding: 1rem !important;
+}
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently */
+}
+
+/* Custom AppBar properties */
+.app-bar .ant-drawer-header {
+  display: none;
+}
+
+.app-bar .ant-drawer-body {
+  padding: 0 !important;
+}
+
+.clickable-table .ant-table-cell {
+  cursor: pointer;
+}
+
+.clickable-table .ant-table-row {
+  cursor: pointer;
+}
+
+pre {
+  font-family: inherit !important;
+}
+
+.ant-select.readOnly {
+  pointer-events: none;
+}
+
+.no-resize textarea {
+  resize: none;
+}
+
+.fit-hight {
+  height: fit-content !important;
+}
+
+.custom-select-option .ant-select-selection-item .ant-list-item {
+  display: contents;
+}
+
+.custom-select-option .ant-select-selection-item .ant-list-item-meta-description {
+  display: none;
+}
+
+.custom-select-option .ant-select-selection-item .ant-list-item-meta-title {
+  font-size: inherit;
+  font-weight: inherit;
+  display: contents;
+}
+
+.label-padding-0 .ant-form-item-label {
+  padding: 0 !important;
+}
+
+.connection-select {
+  max-width: 300px !important;
+  min-width: 30%;
+  align-self: flex-start;
+}
+
+.connection-radio {
+  max-width: 200px !important;
+  width: 150px;
+}
+
+.light-text td,
+.light-text th {
+  color: #fff !important;
+}
+
+.no-style-a:link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+.no-style-a,
+.no-style-a:hover,
+.no-style-a:visited,
+.no-style-a:focus,
+.no-style-a:active {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+[data-color-scheme='dark'] {
+  color-scheme: dark !important;
+}
+
+[data-color-scheme='light'] {
+  color-scheme: light !important;
+}
+
+.ant-table-content {
+  /* width: auto; */
+}
+
+.ant-descriptions-header {
+  margin-bottom: 4px !important;
+}
+
+.ant-layout .ant-layout-sider-children {
+  height: auto;
+}
+
+.remove-left-table-margin .ant-table-scroll-horizontal {
+  margin-left: 0 !important;
 }

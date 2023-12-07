@@ -1,4 +1,4 @@
-import './App.css';
+import './index.css';
 
 import { useCallback, useMemo } from 'react';
 import React from 'react';
@@ -16,7 +16,7 @@ function App() {
         key={appRoute.path}
         path={appRoute.path}
         element={
-          <PermissionAndRoleRoute  roles={appRoute.role}>
+          <PermissionAndRoleRoute permissions={appRoute.permission} roles={appRoute.role}>
             {component}
           </PermissionAndRoleRoute>
         }

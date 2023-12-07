@@ -1,15 +1,17 @@
 /* *****************************************************************************
- Copyright (c) 2020-2022 Kingteza and/or its affiliates. All rights reserved.
- KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+Copyright (c) 2020-2022 Kingteza and/or its affiliates. All rights reserved.
+KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
+/* eslint-disable simple-import-sort/imports */
 
 import React from 'react';
 import { ReactElement, ReactNode } from 'react';
 import LoginScreen from 'screens/auth/LoginScreen';
 
 import Role from './constants/role.enum';
-import InitialLayout from './layouts/main/MainLayout';
-import AllVenuesScreen from './screens/venue/AllVenuesScreen';
+import MainLayout from './layouts/main/MainLayout';
+import DashboardScreen from 'screens/dashboard/DashboardScreen';
+import Permission from 'constants/user-roles/permission.enum';
 
 /**
  * defining the routes and its layout. Inspired by a Github
@@ -24,19 +26,19 @@ export interface AppRoute {
   path: string;
   subRoutes?: AppRoute[];
   name?: string; // Indicating the name for the route. This can be useful when you want to display the route name as the title
-  permission?: string[];
+  permission?: Permission[];
   role?: Role | Role[];
 }
 
 const routes: AppRoute[] = [
   {
     path: '/*',
-    default: 'venues',
-    component: <InitialLayout />,
+    default: '',
+    component: <MainLayout />,
     subRoutes: [
       {
-        component: <AllVenuesScreen />,
-        path: 'venues',
+        component: <DashboardScreen />,
+        path: '',
       },
     ],
   },

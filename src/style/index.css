@@ -1,0 +1,42 @@
+@import './scrollbar.css';
+
+
+:root {
+    --primary-color: #1890ff;
+    --primary-invert: white;
+  }
+  
+  .site-layout .site-layout-background {
+    /* background: #fff; */
+  }
+  
+  .site-layout .layout-header {
+    /* color: #000 !important; */
+  }
+  
+  .site-layout .layout-header .ant-typography {
+    /* color: #000 !important; */
+  }
+  
+  .ant-layout-sider-trigger {
+    /* background-color: rgb(223, 223, 223) !important; */
+  }
+  
+  .ant-layout-sider-trigger svg {
+    /* color: black !important; */
+  }
+  
+  .ant-layout {
+    /* background-color: #ffffff !important; */
+  }
+  
+  
+  .ant-tabs-tab-active {
+    /* background: var(--primary-color)!important; */
+  }
+  
+  .ant-tabs-tab-active div {
+    /* background: var(--primary-color) !important; */
+    /* color: var(--primary-invert) !important; */
+  }
+  
