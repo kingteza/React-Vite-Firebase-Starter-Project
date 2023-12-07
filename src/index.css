@@ -282,3 +282,7 @@ pre {
 .remove-left-table-margin .ant-table-scroll-horizontal {
   margin-left: 0 !important;
 }
+
+.full-height-sider .ant-layout-sider-children  {
+  height: 100%;
+}

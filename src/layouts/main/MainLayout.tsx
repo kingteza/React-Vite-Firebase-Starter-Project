@@ -82,7 +82,7 @@ const MainLayout = () => {
         breakpoint={'lg'}
         collapsible
         theme="dark"
-        className="custom-scroll site-layout-background minus-title-bar-height-w overflow-auto"
+        className={"custom-scroll site-layout-background minus-title-bar-height-w overflow-auto " + (items.length < 15 ? ' full-height-sider ' : '')}
         trigger={isDesktop ? undefined : null}
         collapsedWidth={isDesktop ? undefined : 0}
         collapsed={collapsed}
