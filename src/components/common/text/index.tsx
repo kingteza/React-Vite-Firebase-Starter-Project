@@ -3,13 +3,6 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { Text } from 'components/common/text';
-import React, { useEffect, useState } from 'react';
+import { Typography } from 'antd';
 
-const DashboardScreen = () => {
-  return <div>
-    <Text>This is the dashboard</Text>
-  </div>;
-};
-
-export default DashboardScreen;
+export const { Text } = Typography;
