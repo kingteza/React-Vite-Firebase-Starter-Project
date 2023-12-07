@@ -6,13 +6,14 @@
 import 'cropperjs/dist/cropper.css';
 
 import {
+  LoadingOutlined,
   RotateLeftOutlined,
   RotateRightOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
-import FormItem, { FormItemProps } from 'antd/lib/form/FormItem';
-import Modal from 'antd/lib/modal';
-import Upload, { UploadProps } from 'antd/lib/upload';
+import { Form, FormItemProps } from 'antd';
+import { Modal } from 'antd';
+import { Upload, UploadProps } from 'antd';
 import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import React, {
   FC,
@@ -23,6 +24,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+const FormItem = Form.Item;
 import { Cropper, ReactCropperElement } from 'react-cropper';
 import { useTranslation } from 'react-i18next';
 
@@ -55,15 +57,18 @@ export function dataURLtoFile({ url, name }) {
 interface Props extends FormItemProps {
   values?: string[] | string;
   maxCount?: number;
-  onChange: (file?: UploadFile, allFiles?: UploadFile[]) => void;
+  onChange?: (file?: UploadFile, allFiles?: UploadFile[]) => void;
   buttonTitle?: string;
   hidePreview?: boolean;
   buttonSize?: string;
   showButtonText?: boolean;
+  aspectRatio?: number;
   showOnlyIcon?: boolean;
   icon?: ReactElement;
   loading?: boolean;
   buttonType?: string;
+  onAdd?: (file?: UploadFile) => Promise<void>;
+  onRemove?: (file?: UploadFile) => void;
 }
 
 /**
@@ -85,6 +90,7 @@ const ImagePicker: FC<Props> = ({
   label,
   name,
   onChange,
+  aspectRatio,
   buttonTitle,
   hidePreview,
   buttonSize = 'large',
@@ -93,6 +99,8 @@ const ImagePicker: FC<Props> = ({
   icon = <UploadOutlined />,
   loading,
   maxCount = 1,
+  onAdd,
+  onRemove,
   ...props
 }) => {
   const [previewTitle, setPreviewTitle] = React.useState('');
@@ -115,7 +123,7 @@ const ImagePicker: FC<Props> = ({
     setPreviewVisible(true);
     setPreviewTitle(file.name);
   };
-
+  const [showLoadingIndicator, setShowLoadingIndicator] = useState(false);
   const handleCropChange = () => {};
 
   const handleRotate = (isLeft?: boolean) => {
@@ -124,7 +132,7 @@ const ImagePicker: FC<Props> = ({
   };
 
   useEffect(() => {
-    onChange(fileList[0], fileList);
+    onChange?.(fileList[0], fileList);
   }, [fileList, onChange]);
 
   const onClickConfirmCrop = () => {
@@ -133,6 +141,7 @@ const ImagePicker: FC<Props> = ({
     // get the new image
     const { type, size, name, uid } = fileRef.current as any;
 
+    setShowLoadingIndicator(true);
     // const file: any = dataURLtoFile({ url, name });
     croppedImgData?.toBlob(async (blob: any) => {
       const file = Object.assign(new File([blob], name, { type }), {
@@ -149,7 +158,16 @@ const ImagePicker: FC<Props> = ({
         thumbUrl: url,
         originFileObj: fileResized,
       };
+      if (onAdd) {
+        try {
+          setShowLoadingIndicator(true);
+          await onAdd(fl);
+        } finally {
+          setShowLoadingIndicator(false);
+        }
+      }
       setFileList([fl, ...fileList]);
+      setShowLoadingIndicator(false);
       // if (beforeUploadRef?.current) beforeUploadRef?.current(file, [file]);
     });
     setPreview(undefined);
@@ -168,21 +186,30 @@ const ImagePicker: FC<Props> = ({
       reader.addEventListener('load', () => {
         if (typeof reader.result === 'string') {
           setPreview(reader.result);
+          const b = localStorage.getItem('cropper.box');
+          const box = b ? JSON.parse(b) : undefined;
+          if (box) {
+            // cropper?.current?.cropper.
+            cropper?.current?.cropper.setCropBoxData(box);
+          }
+          setTimeout(() => {
+            onCropMove();
+          }, 100);
         }
       });
       reader.readAsDataURL(file);
     }
   }, []);
-  // useEffect(() => {
-  //   if (values?.length || typeof values === 'string') {
-  //     const list = Array.isArray(values)
-  //       ? values.map((url) => {
-  //           return [{ url }];
-  //         })
-  //       : [{ url: values }];
-  //     setFileList(list);
-  //   }
-  // }, [values]);
+  useEffect(() => {
+    if (values?.length || typeof values === 'string') {
+      const list = Array.isArray(values)
+        ? values.map((url) => {
+            return [{ uid: values, url }];
+          })
+        : [{ uid: values, url: values }];
+      setFileList(list as any);
+    }
+  }, [values]);
   const { t } = useTranslation();
 
   const validator = useMemo(
@@ -203,6 +230,158 @@ const ImagePicker: FC<Props> = ({
 
   const uploadComponent = useMemo(
     () => (
+      <UploadComponent
+        showLoadingIndicator={showLoadingIndicator}
+        _buttonTitle={_buttonTitle}
+        buttonSize={buttonSize}
+        buttonType={buttonType}
+        fileList={fileList}
+        hidePreview={hidePreview}
+        icon={icon}
+        loading={loading}
+        maxCount={maxCount}
+        onChangeFile={onChangeFile}
+        onRemove={onRemove}
+        showButtonText={showButtonText}
+        handlePreview={handlePreview}
+        setFileList={setFileList}
+      />
+    ),
+    [
+      _buttonTitle,
+      buttonSize,
+      buttonType,
+      fileList,
+      hidePreview,
+      icon,
+      loading,
+      maxCount,
+      showLoadingIndicator,
+      onChangeFile,
+      onRemove,
+      showButtonText,
+    ],
+  );
+
+  beforeUploadRef.current = uploadComponent.props.beforeUpload;
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  const [croppedBoxData, setCroppedBoxData] = useState<Cropper.CropBoxData>();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (croppedBoxData) {
+        localStorage.setItem('cropper.box', JSON.stringify(croppedBoxData));
+      }
+    }, 400);
+    return () => clearTimeout(timeout);
+  }, [croppedBoxData]);
+
+  useEffect(() => {
+    if (!preview) {
+      setWidth(0);
+      setHeight(0);
+    }
+  }, [preview]);
+
+  const onCropMove = useCallback(async () => {
+    const ref = cropper?.current?.cropper;
+    if (ref) {
+      const { width, height } = ref.getCroppedCanvas();
+      setCroppedBoxData(ref.getCropBoxData());
+      setWidth(width);
+      setHeight(height);
+    }
+  }, []);
+
+  return (
+    <>
+      <FormItem
+        label={label}
+        {...props}
+        name={name}
+        className="mb-0"
+        rules={[validator, ...(props.rules ?? [])] as any}
+      >
+        {uploadComponent}
+      </FormItem>
+      <Modal
+        open={Boolean(preview)}
+        maskClosable={false}
+        onOk={onClickConfirmCrop}
+        closable={false}
+        onCancel={onClickCancelCrop}
+      >
+        <Cropper
+          ref={cropper as any}
+          src={preview}
+          cropmove={onCropMove}
+          viewMode={3}
+          width={'150%'}
+          aspectRatio={aspectRatio}
+          cropend={() => handleCropChange()}
+        />
+        <p className="text-center">{[width, height].join(' ⨉ ')}</p>
+        <div className="mt-2 d-flex justify-content-center">
+          <ButtonComponent
+            size="large"
+            icon={<RotateLeftOutlined />}
+            onClick={() => handleRotate(true)}
+          />
+          <ButtonComponent
+            size="large"
+            icon={<RotateRightOutlined />}
+            onClick={() => handleRotate(false)}
+          />
+        </div>
+      </Modal>
+      <Modal
+        open={previewVisible}
+        title={previewTitle}
+        footer={null}
+        onCancel={handleCancel}
+      >
+        <div className="text-center">
+          <img alt="example" style={{ maxWidth: '400px' }} src={previewImage} />
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+export const UploadComponent: FC<{
+  _buttonTitle;
+  buttonSize;
+  buttonType;
+  fileList;
+  hidePreview;
+  icon;
+  loading;
+  maxCount;
+  onChangeFile;
+  onRemove;
+  showButtonText;
+  handlePreview;
+  setFileList;
+  showLoadingIndicator?: boolean;
+}> = ({
+  _buttonTitle,
+  buttonSize,
+  buttonType,
+  fileList,
+  hidePreview,
+  icon,
+  loading,
+  maxCount,
+  onChangeFile,
+  onRemove,
+  showButtonText,
+  handlePreview,
+  setFileList,
+  showLoadingIndicator,
+}) => {
+  return (
+    <>
       <Upload
         accept="image/x-png,image/gif,image/jpeg"
         key={fileList.length}
@@ -224,9 +403,10 @@ const ImagePicker: FC<Props> = ({
         showUploadList={!hidePreview}
         onRemove={(file) => {
           const filtered = fileList.filter((f) => file.uid !== f.uid);
+          onRemove?.(file);
           setFileList(filtered);
         }}
-        beforeUpload={(file: any) => {
+        beforeUpload={async (file: any) => {
           // if (!file.isCropped) onChangeFile(file);
           // else setFileList([file]);
           onChangeFile(file);
@@ -235,6 +415,7 @@ const ImagePicker: FC<Props> = ({
         // height={100}
         maxCount={maxCount}
       >
+        {showLoadingIndicator && <LoadingOutlined />}
         {
           <div className="d-flex flex-column">
             {fileList.length < maxCount && (
@@ -251,65 +432,6 @@ const ImagePicker: FC<Props> = ({
           </div>
         }
       </Upload>
-    ),
-    [
-      _buttonTitle,
-      buttonSize,
-      buttonType,
-      fileList,
-      hidePreview,
-      icon,
-      loading,
-      maxCount,
-      onChangeFile,
-      showButtonText,
-    ],
-  );
-
-  beforeUploadRef.current = uploadComponent.props.beforeUpload;
-
-  return (
-    <>
-      <FormItem
-        label={label}
-        {...props}
-        name={name}
-        className="mb-0"
-        rules={[validator, ...(props.rules ?? [])] as any}
-      >
-        {uploadComponent}
-      </FormItem>
-      <Modal
-        visible={Boolean(preview)}
-        maskClosable={false}
-        onOk={onClickConfirmCrop}
-        closable={false}
-        onCancel={onClickCancelCrop}
-      >
-        <Cropper ref={cropper as any} src={preview} cropend={() => handleCropChange()} />
-        <div className="mt-2 d-flex justify-content-center">
-          <ButtonComponent
-            size="large"
-            icon={<RotateLeftOutlined />}
-            onClick={() => handleRotate(true)}
-          />
-          <ButtonComponent
-            size="large"
-            icon={<RotateRightOutlined />}
-            onClick={() => handleRotate(false)}
-          />
-        </div>
-      </Modal>
-      <Modal
-        visible={previewVisible}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <div className="text-center">
-          <img alt="example" style={{ maxWidth: '400px' }} src={previewImage} />
-        </div>
-      </Modal>
     </>
   );
 };

@@ -2,17 +2,15 @@ import './index.css';
 import './config/localization/i18n';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { createRoot } from 'react-dom/client';
 
 import App from './App';
-import store from './reducer/store';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!);
+
+root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <App />
   </React.StrictMode>,
-  document.getElementById('root'),
 );

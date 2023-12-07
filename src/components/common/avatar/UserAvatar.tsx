@@ -5,8 +5,7 @@
 
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-initials-sprites';
-import Avatar from 'antd/lib/avatar/avatar';
-import Tooltip from 'antd/lib/tooltip';
+import { Avatar, Tooltip } from 'antd';
 import React, { FC, useMemo } from 'react';
 
 interface UserAvatarProps {

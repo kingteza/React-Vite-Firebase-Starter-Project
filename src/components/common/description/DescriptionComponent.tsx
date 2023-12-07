@@ -3,7 +3,7 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import Divider from 'antd/lib/divider';
+import { Divider } from 'antd';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 

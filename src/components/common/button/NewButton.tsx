@@ -4,6 +4,7 @@
 ***************************************************************************** */
 
 import { PlusOutlined } from '@ant-design/icons';
+import { ButtonType } from 'antd/lib/button';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,13 +15,18 @@ export const NewButton: FC<{
   to?: string;
   onClick?: (value: boolean) => void;
   title?: string;
-}> = ({ onClick, title, to }) => {
+  type?: ButtonType;
+  block?: boolean;
+  className?: string;
+}> = ({ block, className, type = 'primary', onClick, title, to }) => {
   const { t } = useTranslation();
 
   return (
     <ButtonComponent
-      type="primary"
+      type={type}
+      className={className}
       to={to}
+      block={block}
       onClick={onClick && (() => onClick(true))}
       icon={<PlusOutlined />}
     >

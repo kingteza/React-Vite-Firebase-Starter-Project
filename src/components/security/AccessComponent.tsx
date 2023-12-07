@@ -6,7 +6,7 @@
 import React, { FC, useEffect, useState } from 'react';
 
 import Role from '../../constants/role.enum';
-import UserPrincipal from '../../models/user/UserPrincipal';
+import UserPrincipal from '../../models/UserPrincipal';
 import { hasAccess } from '../../util/AccessUtil';
 
 interface AccessProps {

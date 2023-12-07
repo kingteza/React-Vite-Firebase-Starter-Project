@@ -3,7 +3,7 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import Steps from 'antd/lib/steps';
+import { Steps } from 'antd';
 import React, { FC, ReactElement, useCallback, useMemo, useState } from 'react';
 
 import Hider from '../appearance/Hider';

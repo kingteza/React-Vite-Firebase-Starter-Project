@@ -2,24 +2,28 @@
  Copyright (c) 2020-2021 KINGTEZA and/or its affiliates. All rights reserved.
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
-
-import Table, { ColumnsType, TableProps } from 'antd/lib/table/Table';
+ 
+import { Table } from 'antd';
+import { ColumnsType, TableProps } from 'antd/lib/table';
 import React, { useMemo } from 'react';
 
 const PageConstant = {
   SIZE: 10,
 };
 
+export type TableComponentColumnProp<T>  = {
+  dataIndex?: keyof T;
+  render?: (value: any, record: T, index: number) => React.ReactNode;
+  hidden?: boolean;
+  title?: any;
+}[] &
+  ColumnsType<T>;
+
 interface TableComponentProps<T> extends TableProps<T> {
   minusHeight?: number;
   count?: number;
   dataSource?: T[];
-  columns: {
-    dataIndex?: keyof T;
-    render?: (_, record: T) => React.ReactNode;
-    hidden?: boolean;
-  }[] &
-    ColumnsType<T>;
+  columns: TableComponentColumnProp<T>;
   onPageSizeChanged?: (page: number, pageSize: number) => void;
 }
 
@@ -32,6 +36,7 @@ function TableComponent<T>({
   rowKey = 'id',
   columns,
   className,
+  scroll,
   ...props
 }: TableComponentProps<T>) {
   const cols = useMemo(() => columns.filter((val: any) => !val.hidden), [columns]);
@@ -43,7 +48,7 @@ function TableComponent<T>({
       rowKey={rowKey as any}
       onRow={onRow as any}
       {...(props as any)}
-      scroll={{
+      scroll={scroll ? scroll : {
         // y: `calc(100vh - ${minusHeight ?? 0}px)`,
         x: true,
         // scrollToFirstRowOnChange: true,

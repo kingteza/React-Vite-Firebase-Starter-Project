@@ -9,11 +9,7 @@ import { auth } from 'config/firebase/FirebaseConfig';
 import ErrorCode from './ErrorCode';
 
 const authUserServiceLink = import.meta.env.VITE_SERVER_URL as string;
-const orgServiceLink = import.meta.env.VITE_SERVER_URL as string;
-const orgMetaServiceLink = import.meta.env.VITE_SERVER_URL as string;
-const connectionServiceLink = import.meta.env.VITE_SERVER_URL as string;
-const ledgerServiceLink = import.meta.env.VITE_SERVER_URL as string;
-const inventoryServiceLink = import.meta.env.VITE_SERVER_URL as string;
+
 export interface ErrorResponse {
   code: ErrorCode;
   known: boolean;
@@ -21,18 +17,18 @@ export interface ErrorResponse {
   message: string | string[];
 }
 
-const requestInterceptor = async (config: AxiosRequestConfig) => {
-  const accessToken = await auth?.currentUser?.getIdToken();
+export const requestInterceptor = async (config: AxiosRequestConfig) => {
+  // const accessToken = await auth?.currentUser?.getIdToken();
 
   const tokenType = 'Bearer';
-  if (accessToken && config.headers) {
-    config.headers.Authorization = `${tokenType} ${accessToken}`;
-  }
+  // if (accessToken && config.headers) {
+  //   config.headers.Authorization = `${tokenType} ${accessToken}`;
+  // }
   config.data = JSON.stringify(config.data);
   return config;
 };
 
-const responseInterceptor = async (config: AxiosRequestConfig) => {
+export const responseInterceptor = async (config: AxiosRequestConfig) => {
   try {
     config.data = typeof config.data === 'string' ? JSON.parse(config.data) : config.data;
     return config;
@@ -41,12 +37,15 @@ const responseInterceptor = async (config: AxiosRequestConfig) => {
   }
 };
 
-const handleResponseError = async (
+export const handleResponseError = async (
   error: AxiosError<ErrorResponse>,
 ): Promise<ErrorResponse> => {
   let data: any = error.response?.data ?? '{}';
   data = typeof data === 'string' ? JSON.parse(data) : data;
   console.error(data);
+  if(error.response?.status === 401) {
+    // await AuthService.logout();
+  }
   const reject = {
     ...data,
     status: error.response?.status,
@@ -68,5 +67,5 @@ export const api = new Axios({
   validateStatus: validateState,
 });
 
-api.interceptors.request.use(requestInterceptor);
-api.interceptors.response.use(responseInterceptor, handleResponseError);
+api.interceptors.request.use(requestInterceptor as any);
+api.interceptors.response.use(responseInterceptor as any, handleResponseError);

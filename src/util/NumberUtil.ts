@@ -16,4 +16,9 @@ function round(num: number = 0) {
   return Math.round(num * 100) / 100;
 }
 
-export default { round, toMoney };
+function randInt(max = 1000000000) {
+  const randomInteger = Math.floor(Math.random() * (max + 1));
+  return randomInteger;
+}
+
+export default { round, toMoney, randInt };

@@ -3,16 +3,18 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import Item, { Meta } from 'antd/lib/list/Item';
-import Select from 'antd/lib/select';
-import React, { FC } from 'react';
+import {List } from 'antd';
+import React, { FC, PropsWithChildren } from 'react';
+
+const Meta = List.Item.Meta;
+const Item = List.Item;
 
 type CustomSelectOptionProps = {
   title: string;
   description?: string;
 };
 
-const CustomSelectOption: FC<CustomSelectOptionProps> = ({
+const CustomSelectOption: FC<PropsWithChildren<CustomSelectOptionProps>> = ({
   title,
   description,
   children,

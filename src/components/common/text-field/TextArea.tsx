@@ -3,9 +3,8 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { FormInstance } from 'antd/lib/form/Form';
-import FormItem, { FormItemProps } from 'antd/lib/form/FormItem';
-import TextArea, { TextAreaProps } from 'antd/lib/input/TextArea';
+import { Form, FormInstance, FormItemProps, Input } from 'antd';
+import { TextAreaProps } from 'antd/lib/input';
 import React, { InputHTMLAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -42,14 +41,14 @@ const TextAreaComponent: React.FC<TextFieldProps> = ({
   rules = [],
   placeholder,
   onEnter,
-  form,
   nextFocus,
   className,
   ...props
 }) => {
   const { t } = useTranslation();
+  const form = Form.useFormInstance();
   return (
-    <FormItem
+    <Form.Item
       {...props}
       className={className}
       label={label}
@@ -61,13 +60,14 @@ const TextAreaComponent: React.FC<TextFieldProps> = ({
         },
       ]}
     >
-      <TextArea
+      <Input.TextArea
         {...props}
+        
         className={className}
         onPressEnter={(e) => onEnterInternalTextField(e, nextFocus, form, onEnter)}
         placeholder={placeholder ?? (label as any)}
       />
-    </FormItem>
+    </Form.Item>
   );
 };
 

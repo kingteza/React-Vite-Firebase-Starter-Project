@@ -25,11 +25,11 @@ const NoPermissionComponent = () => {
       status="403"
       title="403"
       subTitle={t(translations.err.needPermissionToAccessTheResource)}
-      extra={
-        <ButtonComponent onClick={onClickGoBack} type="primary">
-          {t(translations.str.goBack)}
-        </ButtonComponent>
-      }
+      // extra={
+      //   <ButtonComponent onClick={onClickGoBack} type="primary">
+      //     {t(translations.str.goBack)}
+      //   </ButtonComponent>
+      // }
     />
   );
 };

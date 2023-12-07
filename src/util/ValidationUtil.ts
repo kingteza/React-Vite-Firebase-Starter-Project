@@ -16,11 +16,22 @@ const required = (modelName: string) => {
   ];
 };
 
-const passwordValidation = (modelName: string): Rule[] => {
+const passwordValidation = (): Rule[] => {
   return [
     {
       min: 8,
       message: t(translations.err.validation.minLength8),
+    },
+  ];
+};
+
+const percentageValidation = (): Rule[] => {
+  return [
+    {
+      min: 0,
+      max: 100,
+      type: 'number',
+      message: t(translations.err.validation.percentage),
     },
   ];
 };
@@ -47,4 +58,4 @@ const phoneValidation = (modelName: string): Rule[] => {
     },
   ];
 };
-export default { required, passwordValidation, nicValidation, phoneValidation };
+export default { percentageValidation, required, passwordValidation, nicValidation, phoneValidation };

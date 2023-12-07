@@ -3,12 +3,13 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import Descriptions, { DescriptionsProps } from 'antd/lib/descriptions';
+import { Descriptions } from 'antd';
+import { DescriptionsProps } from 'antd/lib/descriptions';
 import React, { FC, useMemo } from 'react';
 
 import NumberUtil from '../../../util/NumberUtil';
 
-type DescPropsNullable = { label?: string; value?: any; noFormatting?: boolean };
+type DescPropsNullable = { label?: string | React.ReactElement; value?: any; noFormatting?: boolean };
 
 type DescProps = { label?: string; value: any; noFormatting?: boolean };
 interface DescListProps extends DescriptionsProps {

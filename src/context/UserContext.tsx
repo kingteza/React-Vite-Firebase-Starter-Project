@@ -4,14 +4,15 @@
 ***************************************************************************** */
 
 import LoadingIndicator from 'components/common/loading/LoadingIndicator';
-import { auth } from 'config/firebase/FirebaseConfig';
-import { User } from 'firebase/auth';
-import UserPrincipal from 'models/user/UserPrincipal';
+import { onAuthStateChanged } from 'firebase/auth';
+import UserPrincipal from 'models/UserPrincipal';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'reducer/store';
+// import AuthService from 'services/auth/AuthService';
 
-interface CurrentUser extends UserPrincipal {}
+interface CurrentUser extends UserPrincipal {
+  loading?: boolean;
+}
 
 const UserContext = React.createContext<CurrentUser>(undefined as any);
 
@@ -21,35 +22,29 @@ export const useUserContext = () => useContext(UserContext);
 
 // eslint-disable-next-line react/display-name
 export const withCurrentUserContext = (Component) => (props) => {
-  const dispatch = useAppDispatch();
-  const { currentUser, gettingCurrentUserDetails, errorGettingCurrentUserDetails } =
-    useAppSelector((s) => s.auth);
-
   const [loading, setLoading] = useState(true);
 
+  const [currentUser, setCurrentUser] = useState<CurrentUser>();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(gettingCurrentUserDetails);
-  }, [gettingCurrentUserDetails, errorGettingCurrentUserDetails]);
-
-  useEffect(() => {
-    // setDetails();
-
-    auth.onAuthStateChanged((user: User | null) => {
-      if (user) {
-        setLoading(false);
-      } else {
-        console.log('User is ', user);
-        localStorage.setItem('redirect', window.location.pathname);
-        navigate('/login');
-        setLoading(false);
-      }
-    });
-  }, [navigate]);
+    setLoading(true);
+    // return onAuthStateChanged((user: any) => {
+    //   setLoading(false);
+    //   if (user) {
+    //     AuthService.getCurrentUser().then((e) => {
+    //       setLoading(false);
+    //       setCurrentUser(e);
+    //     });
+    //   } else {
+    //     navigate('/login');
+    //   }
+    // });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <UserContext.Provider value={currentUser as any}>
+    <UserContext.Provider value={{...currentUser as any, loading}}>
       {loading ? <LoadingIndicator loading={loading} /> : <Component {...props} />}
     </UserContext.Provider>
   );

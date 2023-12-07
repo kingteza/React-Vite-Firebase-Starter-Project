@@ -3,7 +3,7 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import message from 'antd/lib/message';
+import { message } from 'antd';
 import { translations } from 'config/localization/translations';
 import { t } from 'i18next';
 import ErrorCode from 'services/ErrorCode';
@@ -105,7 +105,7 @@ const showSuccessUpdating = (modelName: string, key?: any, msg?: string) => {
 const showError = (errorCode?: ErrorCode, key?: any) => {
   let content;
   if (errorCode) {
-    content = `${t(translations.err.code[errorCode])}`;
+    content = t(translations.err.code[errorCode]);
   } else {
     content = errorCode;
   }

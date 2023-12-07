@@ -3,6 +3,7 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
+import { EditOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -17,9 +18,12 @@ interface Props<T> {
 function UpdateButtonTable<T>({ value, onClick }: Props<T>) {
   const { t } = useTranslation();
   return (
-    <ButtonComponent type="link" onClick={() => onClick(value)}>
-      {t(translations.str.update)}
-    </ButtonComponent>
+    <ButtonComponent
+      tooltip={t(translations.str.update)}
+      type="link"
+      onClick={() => onClick(value)}
+      icon={<EditOutlined />}
+    />
   );
 }
 

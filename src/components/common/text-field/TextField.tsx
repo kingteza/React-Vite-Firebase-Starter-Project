@@ -3,10 +3,10 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
+import { LoadingOutlined } from '@ant-design/icons';
+import { Form, FormItemProps, Input } from 'antd';
+import { SizeType } from 'antd/es/config-provider/SizeContext';
 import { FormInstance } from 'antd/lib/form/Form';
-import FormItem, { FormItemProps } from 'antd/lib/form/FormItem';
-import Input from 'antd/lib/input/Input';
-import Password from 'antd/lib/input/Password';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -17,12 +17,19 @@ export interface TextFieldProps extends FormItemProps<any> {
   placeholder?: string;
   onEnter?: React.KeyboardEventHandler<HTMLInputElement>;
   form?: FormInstance<any>;
+  addonAfter?: any;
+  addonBefore?: any;
   nextFocus?: string;
   autoComplete?: string;
   defaultValue?: any;
   readOnly?: boolean;
   value?: any;
+  autoFocus?: boolean;
   disabled?: boolean;
+  size?: SizeType;
+  loading?: boolean;
+  inputRef?: any;
+  onBlur?: any;
   onChange?: (val: any) => void;
 }
 
@@ -47,27 +54,46 @@ const TextField: React.FC<TextFieldProps> = ({
   rules = [],
   placeholder,
   onEnter,
+  size,
   form,
+  addonAfter,
+  addonBefore,
   nextFocus,
   autoComplete = 'off',
   defaultValue,
   readOnly,
   value,
+  loading,
+  onBlur,
+  inputRef,
+  status,
+  autoFocus,
+  onChange, 
   ...props
 }) => {
   const { t } = useTranslation();
 
   const r = useMemo(
-    () => [
-      ...rules,
-      {
-        required,
-        message: `${label ?? placeholder ?? ''} ${t(
-          translations.err.validation.required,
-        )}`,
-      },
-    ],
-    [rules, label, placeholder, t, required],
+    () => {
+      const list = [
+        ...rules,
+        {
+          required,
+          message: `${label ?? placeholder ?? ''} ${t(
+            translations.err.validation.required
+          )}`,
+        },
+      ];
+      if(type === 'email'){
+        list.push({
+          type: 'email',
+          message: t(translations.err.validation.invalidEmail),
+          
+        });
+      }
+      return list;
+    },
+    [rules, required, label, placeholder, t, type]
   );
 
   const inputProps = {
@@ -75,16 +101,23 @@ const TextField: React.FC<TextFieldProps> = ({
     value: value,
     readOnly: readOnly,
     defaultValue: defaultValue,
+    autoFocus,
+    addonBefore,
+    ref: inputRef,
+    onBlur,
+    addonAfter:loading ? <LoadingOutlined /> : addonAfter,
+    status,
+    size: size,
     autoComplete: autoComplete,
     onPressEnter: (e) => onEnterInternalTextField(e, nextFocus, form, onEnter),
     type: type as any,
     placeholder: placeholder ?? (label as any),
   };
-  const Component = type == 'password' ? Password : Input;
+  const Component = type == 'password' ? Input.Password : Input;
   return (
-    <FormItem {...props} label={label} rules={r}>
-      <Component {...inputProps} />
-    </FormItem>
+    <Form.Item  {...props} label={label} rules={r}>
+      <Component {...(inputProps as any)} />
+    </Form.Item>
   );
 };
 

@@ -8,7 +8,7 @@ import { ReactElement, ReactNode } from 'react';
 import LoginScreen from 'screens/auth/LoginScreen';
 
 import Role from './constants/role.enum';
-import InitialLayout from './layouts/InitialLayout/InitialLayout';
+import InitialLayout from './layouts/main/MainLayout';
 import AllVenuesScreen from './screens/venue/AllVenuesScreen';
 
 /**

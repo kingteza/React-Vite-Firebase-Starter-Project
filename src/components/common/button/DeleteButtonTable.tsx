@@ -3,8 +3,10 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import Popconfirm from 'antd/lib/popconfirm';
-import React, { useMemo } from 'react';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
+import { ButtonType } from 'antd/es/button';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
@@ -12,23 +14,45 @@ import ButtonComponent from './Button';
 
 interface Props<T> {
   value: T;
-  onClick: (value: T) => void;
+  onClick: (value: T) => Promise<void>;
   text?: string;
+  loading?: boolean;
+  disabled?: boolean;
+  type?: ButtonType;
+  block?: boolean;
 }
 
-function DeleteButtonTable<T>({ value, onClick, text }: Props<T>) {
+function DeleteButtonTable<T>({ block, value, loading, onClick, text, disabled, type = "link" }: Props<T>) {
   const { t } = useTranslation();
   const txt = useMemo(() => text ?? t(translations.str.delete), [text, t]);
+  const [_loading, set_loading] = useState(false);
+  useEffect(() => {
+    set_loading(loading ?? false);
+  }, [loading]);
+  const _onClick = useCallback(async () => {
+    try {
+      set_loading(true);
+      await onClick(value);
+    } finally {
+      set_loading(false);
+    }
+  }, [onClick, value]);
   return (
     <Popconfirm
       title={t(translations.qus.doYouWantToDelete)}
       okText={txt.toUpperCase()}
       cancelText={t(translations.str.no).toUpperCase()}
-      onConfirm={() => onClick(value)}
+      onConfirm={_onClick}
     >
-      <ButtonComponent type="link" danger>
-        {txt}
-      </ButtonComponent>
+      <ButtonComponent
+        tooltip={txt}
+        icon={<DeleteOutlined />}
+        disabled={disabled}
+        loading={_loading}
+        type={type}
+        danger
+        block={block}
+      />
     </Popconfirm>
   );
 }

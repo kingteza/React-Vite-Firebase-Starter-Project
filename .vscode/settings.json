@@ -2,5 +2,8 @@
   "cSpell.words": ["antd", "Sider"],
   "typescript.preferences.quoteStyle": "single",
   "prettier.singleQuote": true,
-  "i18next.i18nPaths": "f:/JS/React Vite Starter Project/locale"
+  "i18next.i18nPaths": "f:/JS/React Vite Starter Project/locale",
+  "i18n-ally.localesPaths": [
+    "locale"
+  ]
 }

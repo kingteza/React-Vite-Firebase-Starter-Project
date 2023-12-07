@@ -4,24 +4,30 @@
 ***************************************************************************** */
 
 import { Tabs } from 'antd';
-import { Content } from 'antd/lib/layout/layout';
+import { Layout } from 'antd';
+import { TabsPosition } from 'antd/lib/tabs';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
+import { useLocation } from 'react-router-dom';
+
+const { Content }= Layout;
 
 interface TabViewWithRouteProps {
-  initialKey: string;
+  initialKey?: string;
   positionOfRoute: number;
   className?: string;
   tabs: {
     label: string;
     key: string;
   }[];
+  tabPosition?: TabsPosition;
 }
 
 export const TabViewWithRoute: React.FC<TabViewWithRouteProps> = ({
   positionOfRoute,
-  initialKey = '',
+  initialKey = '*',
   tabs,
+  tabPosition = 'top',
   className,
 }) => {
   const [activeKey, setActiveKey] = useState<string>(initialKey);
@@ -31,17 +37,23 @@ export const TabViewWithRoute: React.FC<TabViewWithRouteProps> = ({
     navigate(route);
   };
 
+  const location = useLocation();
   useEffect(() => {
     const currentPos = location.pathname.split('/')[positionOfRoute];
     setActiveKey(currentPos ?? '');
     if (!currentPos) {
       navigate(initialKey, { replace: true });
     }
-  }, [location.pathname]);
+  }, [initialKey, location.pathname, navigate, positionOfRoute]);
 
   return (
     <div className={className}>
-      <Tabs type="card" tabPosition={'top'} activeKey={activeKey} onChange={callback}>
+      <Tabs
+        type="card"
+        tabPosition={tabPosition}
+        activeKey={activeKey}
+        onChange={callback}
+      >
         {tabs.map(({ key, label }) => {
           return (
             <Tabs.TabPane key={key} tab={label}>

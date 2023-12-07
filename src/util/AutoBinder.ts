@@ -3,16 +3,10 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { withCurrentUserContext } from 'context/UserContext';
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import autoBind from 'auto-bind';
 
-const VenueLayout = () => {
-  return (
-    <main>
-      <Outlet />
-    </main>
-  );
-};
-
-export default withCurrentUserContext(VenueLayout);
+export default abstract class AutoBinder {
+    constructor() {
+        autoBind(this)
+    }
+}

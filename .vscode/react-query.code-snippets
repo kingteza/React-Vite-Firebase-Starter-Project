@@ -1,0 +1,26 @@
+{
+  "useQuery": {
+    "prefix": "useQuery",
+    "body": [
+      "  const { data : ${3:} } = useQuery${1:}(['${3:}'], ()=> ${2:});"
+    ],
+    "description": "useQuery"
+  },
+  "Create React Mutation": {
+    "prefix": "useMutation",
+    "body": [
+      "  const ${3:} = useMutation${1:}(${2:}, {",
+      "    onSuccess() {",
+      "      ${4:}",
+      "    },",
+      "  });",
+      ""
+    ],
+    "description": "Create React Mutation"
+  },
+  "useQueryClient": {
+    "prefix": "useQueryClient",
+    "body": ["  const queryClient = useQueryClient${1:}()", ""],
+    "description": "useQueryClient"
+  }
+}

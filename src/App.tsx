@@ -16,7 +16,7 @@ function App() {
         key={appRoute.path}
         path={appRoute.path}
         element={
-          <PermissionAndRoleRoute roles={appRoute.role}>
+          <PermissionAndRoleRoute  roles={appRoute.role}>
             {component}
           </PermissionAndRoleRoute>
         }

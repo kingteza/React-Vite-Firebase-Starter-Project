@@ -1,5 +1,10 @@
 {
   "str": {
+    "language": "Language",
+    "logout": "Logout",
+    "darkMode": "Dark Mode",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
     "login": "Login",
     "delete": "Delete",
     "no": "No",
@@ -12,6 +17,7 @@
   },
   "message": {
     "success": {
+      "got": "Got Data",
       "login": "Logged in Successfully",
       "saved": "Saved Successfully",
       "deleted": "Deleted Successfully",
@@ -19,12 +25,21 @@
       "successSwitchToGRN": "Successfully Switched the purchase order to purchase invoice."
     },
     "loading": {
+      "getting": "Getting",
       "saving": "Saving",
       "deleting": "Deleting",
       "updating": "Updating"
     },
     "fileUploadMessage1": "Drag file here or ",
     "fileUploadMessage2": "Click to Upload"
+  },
+  "type": {
+    "dateRangePickerOptions": {
+      "TODAY": "Today",
+      "YESTERDAY": "Yesterday",
+      "PAST_7_DAYS": "Past 7 Days",
+      "PAST_MONTH": "Past Month"
+    }
   },
   "err": {
     "save": "An Error occurred while saving the data",
@@ -35,6 +50,11 @@
     "needPermissionToAccessTheResource": "You need permission to access this resource",
     "notFound": "Not Found",
     "validation": {
+      "minLength8": "Minimum Length is 8 characters.",
+      "invalidNic": "Invalid NIC",
+      "invalid": "Invalid",
+      "percentage": "Invalid Percentage",
+      "invalidEmail": "Invalid Email",
       "required": "Required"
     },
     "code": {
