@@ -65,8 +65,8 @@ const UserDetailsComponent = () => {
 
   const { isMobile } = useWindowDimensions();
   const [open, setOpen] = useState(false);
-  const { mode } = useTheme();
-
+  const { mode, set } = useTheme();
+  
   const menu = (
     <Menu>
       {name && (

@@ -15,6 +15,7 @@
     "@ant-design/icons": "^5.2.6",
     "@dicebear/collection": "^7.0.4",
     "@dicebear/core": "^7.0.4",
+    "@uidotdev/usehooks": "^2.4.1",
     "antd": "^5.13.3",
     "antd-button-color": "^1.0.4",
     "antd-image-cropper": "^0.4.0",

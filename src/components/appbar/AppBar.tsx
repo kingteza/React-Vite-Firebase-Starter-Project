@@ -35,14 +35,14 @@ const AppBar: FC<Props> = ({ title, menu }) => {
         <div className="d-flex align-items-center w-100">
           {!isDesktop && (
             <ButtonComponent
-              className="menu light-text"
+              className="menu"
               type="text"
               ghost
               icon={<MenuOutlined />}
               onClick={() => setVisible(true)}
             />
           )}
-          <Typography.Title level={3} className="mb-0 pl-2 light-text v-center-text">
+          <Typography.Title level={3} className="mb-0 pl-2 v-center-text">
             {title}
           </Typography.Title>
           <div style={{ flex: 1 }} />
