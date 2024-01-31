@@ -27,10 +27,11 @@ interface SideBarItem {
 }
 
 const MainLayout = () => {
+  const [currentKey, setCurrentKey] = useState<string>();
   const location = useLocation();
   useEffect(() => {
     const current = location.pathname.split('/');
-    setCurrentKey('/' + current[1]);
+    setCurrentKey('/' + (current[1] ?? ''));
   }, [location.pathname]);
 
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ const MainLayout = () => {
                 {renderMenu(sub, `${uniqueKey}${i}`)}
               </Menu.SubMenu>
             ) : (
-              <Menu.Item icon={icon}>
+              <Menu.Item key={link} icon={icon}>
                 {link ? (
                   <Link to={link} className="no-style-a">
                     {t(label)}
@@ -72,7 +73,6 @@ const MainLayout = () => {
   );
   const { isDesktop } = useWindowDimensions();
   const [collapsed, setCollapsed] = useState(false);
-  const [currentKey, setCurrentKey] = useState('dashboard');
   const menu = renderMenu(items, 0);
 
   const { mode: theme } = useTheme();
@@ -92,7 +92,13 @@ const MainLayout = () => {
         collapsed={collapsed}
         onCollapse={setCollapsed}
       >
-        <Menu mode="inline" theme={theme} selectedKeys={[currentKey]} className="h-100">
+        <Menu
+          mode="inline"
+          theme={theme}
+          selectedKeys={currentKey ? [currentKey] : undefined}
+          defaultSelectedKeys={currentKey ? [currentKey] : undefined}
+          className="h-100"
+        >
           {menu}
           <div style={{ height: '48px' }}></div>
         </Menu>
