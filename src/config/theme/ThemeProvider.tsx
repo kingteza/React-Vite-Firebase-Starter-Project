@@ -35,7 +35,7 @@ const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     );
     document.body.clientWidth;
     document.documentElement.style.display = '';
-
+    document.documentElement.classList.add(mode);
   }, [mode]);
   return (
     <ConfigProvider

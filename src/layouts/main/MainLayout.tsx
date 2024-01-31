@@ -7,6 +7,7 @@ import { DashboardOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import AppBar from 'components/appbar/AppBar';
 import { translations } from 'config/localization/translations';
+import { useTheme } from 'config/theme/ThemeProvider';
 import Role from 'constants/role.enum';
 import Permission from 'constants/user-roles/permission.enum';
 import { useUserContext, withCurrentUserContext } from 'context/UserContext';
@@ -24,7 +25,6 @@ interface SideBarItem {
   permissions?: Permission[];
   sub?: SideBarItem[];
 }
-
 
 const MainLayout = () => {
   const location = useLocation();
@@ -75,20 +75,24 @@ const MainLayout = () => {
   const [currentKey, setCurrentKey] = useState('dashboard');
   const menu = renderMenu(items, 0);
 
+  const { mode: theme } = useTheme();
   return (
     <Layout className="site-layout max-height-vh ">
       <AppBar title={'Sample Name'} menu={menu} />
       <Layout.Sider
         breakpoint={'lg'}
         collapsible
-        theme="dark"
-        className={"custom-scroll site-layout-background minus-title-bar-height-w overflow-auto " + (items.length < 15 ? ' full-height-sider ' : '')}
+        theme={theme}
+        className={
+          'custom-scroll site-layout-background minus-title-bar-height-w overflow-auto ' +
+          (items.length < 15 ? ' full-height-sider ' : '')
+        }
         trigger={isDesktop ? undefined : null}
         collapsedWidth={isDesktop ? undefined : 0}
         collapsed={collapsed}
         onCollapse={setCollapsed}
       >
-        <Menu mode="inline" selectedKeys={[currentKey]} className="h-100">
+        <Menu mode="inline" theme={theme} selectedKeys={[currentKey]} className="h-100">
           {menu}
           <div style={{ height: '48px' }}></div>
         </Menu>
