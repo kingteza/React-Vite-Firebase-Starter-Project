@@ -4,5 +4,6 @@
   "prettier.singleQuote": true,
   "i18n-ally.localesPaths": [
     "locale"
-  ]
+  ],
+  "i18next.i18nPaths": "/Users/pandukanandara/Documents/kingteza/meal-token/meal-token-frontend/locale"
 }

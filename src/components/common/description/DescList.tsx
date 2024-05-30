@@ -9,10 +9,10 @@ import React, { FC, useMemo } from 'react';
 
 import NumberUtil from '../../../util/NumberUtil';
 
-type DescPropsNullable = { label?: string | React.ReactElement; value?: any; noFormatting?: boolean };
+export type DescPropsNullable = { label?: string | React.ReactElement; value?: any; noFormatting?: boolean };
 
-type DescProps = { label?: string; value: any; noFormatting?: boolean };
-interface DescListProps extends DescriptionsProps {
+export type DescProps = { label?: string; value: any; noFormatting?: boolean };
+export interface DescListProps extends DescriptionsProps {
   list: (DescPropsNullable | null | undefined | boolean)[];
 }
 

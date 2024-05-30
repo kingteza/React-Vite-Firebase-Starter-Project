@@ -4,15 +4,23 @@
 ***************************************************************************** */
 
 import { Typography } from 'antd';
-import React, { FC, PropsWithChildren, useEffect } from 'react';
+import React, { CSSProperties, FC, useEffect } from 'react';
 
 const { Title } = Typography;
-const TitleWithHeadTitle: FC<{ children: string }> = ({ children }) => {
+const TitleWithHeadTitle: FC<{
+  children: string;
+  style?: CSSProperties;
+  level?: 3 | 5 | 1 | 2 | 4 | undefined;
+}> = ({ level = 3, children, style }) => {
   useEffect(() => {
     document.title = children + ' | KING POS';
   }, [children]);
 
-  return <Title level={3}>{children}</Title>;
+  return (
+    <Title style={style} level={level}>
+      {children}
+    </Title>
+  );
 };
 
 export default TitleWithHeadTitle;

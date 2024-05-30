@@ -1,5 +1,14 @@
 {
   "str": {
+    "success": "Success",
+    "error": "Error",
+    "previous": "Previous",
+    "retry": "Retry",
+    "export": "Export",
+    "action": "Action",
+    "next": "Next",
+    "back": "Back",
+    "cancel": "Cancel",
     "email": "Email",
     "password": "Password",
     "dashboard": "Dashboard",

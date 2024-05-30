@@ -45,7 +45,6 @@ const DateRangePickerWithPastDayPicker: FC<
     const to = dates?.[1];
     const today = dayjs();
     let rst: DateRangePickerOptions | undefined = undefined;
-    console.log('Pass 1');
     if (isToday(today, from, to)) rst = DateRangePickerOptions.TODAY;
     else if (isToday(today.subtract(1, 'day'), from, to))
       rst = DateRangePickerOptions.YESTERDAY;

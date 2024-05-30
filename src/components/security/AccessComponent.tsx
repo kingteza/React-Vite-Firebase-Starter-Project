@@ -3,23 +3,25 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import React, { FC, useEffect, useState } from 'react';
+import Permission from 'constants/user-roles/permission.enum';
+import UserPrincipal from 'models/UserPrincipal';
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 
 import Role from '../../constants/role.enum';
-import UserPrincipal from '../../models/UserPrincipal';
 import { hasAccess } from '../../util/AccessUtil';
 
 interface AccessProps {
   currentUser: UserPrincipal;
   roles?: Role | Role[];
+  permissions?: Permission | Permission[];
 }
 
-const Access: FC<AccessProps> = ({ children, roles = [], currentUser }) => {
+const Access: FC<PropsWithChildren<AccessProps>> = ({ permissions, children, roles = [], currentUser }) => {
   const [has, setHas] = useState<boolean>(true);
 
   useEffect(() => {
-    if (currentUser !== undefined) setHas(hasAccess(roles, currentUser));
-  }, [currentUser, roles]);
+    if (currentUser !== undefined) setHas(hasAccess(permissions, roles, currentUser));
+  }, [currentUser, permissions, roles]);
 
   return <>{has ? children : <></>}</>;
 };

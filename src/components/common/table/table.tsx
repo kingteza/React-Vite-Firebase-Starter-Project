@@ -16,6 +16,8 @@ export type TableComponentColumnProp<T>  = {
   render?: (value: any, record: T, index: number) => React.ReactNode;
   hidden?: boolean;
   title?: any;
+  align?: 'right' | 'left';
+  width?: number | string;
 }[] &
   ColumnsType<T>;
 

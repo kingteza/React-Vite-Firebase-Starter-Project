@@ -17,6 +17,7 @@ interface PageHeaderComponentProps {
   backUrl?: string;
   className?: string;
   updateHtmlTitle?: boolean;
+  hideBackButton?: boolean;
 }
 const PageHeaderComponent: FC<PropsWithChildren<PageHeaderComponentProps>> = ({
   title = '',
@@ -25,6 +26,7 @@ const PageHeaderComponent: FC<PropsWithChildren<PageHeaderComponentProps>> = ({
   className = ' mb-3',
   children,
   updateHtmlTitle = true,
+  hideBackButton,
 }) => {
   const navigate = useNavigate();
 
@@ -41,26 +43,28 @@ const PageHeaderComponent: FC<PropsWithChildren<PageHeaderComponentProps>> = ({
 
   useEffect(() => {
     if (updateHtmlTitle) {
-      header?.updatePageTitle(title);
+      if (typeof title === 'string') header?.updatePageTitle(title);
     }
   }, [header, title, updateHtmlTitle]);
 
   // return <PageHeader className={className as any} onBack={onClickGoBack} backIcon={<LeftCircleTwoTone />} title={<Typography>{title}</Typography>} />;
   return (
     <div className={className + ' d-flex w-100'} style={{ textAlignLast: 'left' }}>
-      {onClickGoBack && (
-        <ButtonComponent
-          className="mr-2"
-          type="text"
-          onClick={onClickGoBack}
-          icon={<ArrowLeftOutlined></ArrowLeftOutlined>}
-        />
-      )}
-      {title && (
-        <Typography.Title style={{ paddingTop: 0.5 }} level={5}>
-          {title}
-        </Typography.Title>
-      )}
+      <div className="d-flex">
+        {!hideBackButton && onClickGoBack && (
+          <ButtonComponent
+            className="mr-2"
+            type="text"
+            onClick={onClickGoBack}
+            icon={<ArrowLeftOutlined></ArrowLeftOutlined>}
+          />
+        )}
+        {title && (
+          <Typography.Title style={{ paddingTop: 0.5, paddingBottom: 0 }} className='my-0' level={5}>
+            {title}
+          </Typography.Title>
+        )}
+      </div>
       {children}
     </div>
   );

@@ -20,23 +20,51 @@ interface Props<T> {
   disabled?: boolean;
   type?: ButtonType;
   block?: boolean;
+  shouldConfirm?: boolean;
 }
 
-function DeleteButtonTable<T>({ block, value, loading, onClick, text, disabled, type = "link" }: Props<T>) {
+function DeleteButtonTable<T>({
+  shouldConfirm = true,
+  block,
+  value,
+  loading,
+  onClick,
+  text,
+  disabled,
+  type = 'link',
+}: Props<T>) {
   const { t } = useTranslation();
   const txt = useMemo(() => text ?? t(translations.str.delete), [text, t]);
   const [_loading, set_loading] = useState(false);
   useEffect(() => {
     set_loading(loading ?? false);
   }, [loading]);
-  const _onClick = useCallback(async () => {
-    try {
-      set_loading(true);
-      await onClick(value);
-    } finally {
-      set_loading(false);
-    }
-  }, [onClick, value]);
+  const _onClick = useCallback(
+    async (e) => {
+      try {
+        set_loading(true);
+        await onClick(value);
+      } finally {
+        set_loading(false);
+      }
+    },
+    [onClick, value],
+  );
+
+  if (!shouldConfirm) {
+    return (
+      <ButtonComponent
+        tooltip={txt}
+        icon={<DeleteOutlined />}
+        disabled={disabled}
+        loading={_loading}
+        type={type}
+        danger
+        block={block}
+        onClick={_onClick}
+      />
+    );
+  }
   return (
     <Popconfirm
       title={t(translations.qus.doYouWantToDelete)}

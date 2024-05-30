@@ -316,8 +316,8 @@ const ImagePicker: FC<Props> = ({
           ref={cropper as any}
           src={preview}
           cropmove={onCropMove}
-          viewMode={3}
-          width={'150%'}
+          viewMode={1}
+          // width={'150%'}
           aspectRatio={aspectRatio}
           cropend={() => handleCropChange()}
         />

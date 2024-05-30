@@ -3,7 +3,7 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import Result from 'antd/lib/result';
+import { Result } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
@@ -25,11 +25,12 @@ const NoPermissionComponent = () => {
       status="403"
       title="403"
       subTitle={t(translations.err.needPermissionToAccessTheResource)}
-      // extra={
-      //   <ButtonComponent onClick={onClickGoBack} type="primary">
-      //     {t(translations.str.goBack)}
-      //   </ButtonComponent>
-      // }
+      extra={
+        <></>
+        // <ButtonComponent onClick={onClickGoBack} type="primary">
+        //   {t(translations.str.goBack)}
+        // </ButtonComponent>
+      }
     />
   );
 };

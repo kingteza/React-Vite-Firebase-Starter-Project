@@ -5,7 +5,6 @@
 
 import {
   AlertOutlined,
-  LoginOutlined,
   LogoutOutlined,
   TranslationOutlined,
   UserOutlined,
@@ -21,26 +20,23 @@ import { useUserContext } from 'context/UserContext';
 import useWindowDimensions from 'context/WindowDimension';
 import React, { FC, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-// import AuthService from 'services/auth/AuthService';
+import AuthService from 'services/AuthService';
 
-export const DarkModeMenuItem: FC<{ key }> = ({ key }) => {
+export const DarkModeMenuItem : FC<any> = (props) => {
   const { mode, set } = useTheme();
   const { t } = useTranslation();
 
   const isDark = useMemo(() => mode === 'dark', [mode]);
 
-  return (
-    <Menu.Item key="1" icon={<AlertOutlined />} onClick={() => set()}>
+  return [
+    <Menu.Item {...props} key="theme" icon={<AlertOutlined />} onClick={() => set()}>
       {' '}
       {t(translations.str.darkMode)}
       {' : '}
       {isDark ? t(translations.str.enabled) : t(translations.str.disabled)}
-    </Menu.Item>
-  );
+    </Menu.Item>,
+  ];
 };
-
-export interface UserDetailsComponentProps {}
 
 export const onClickChangeLanguage = async (i18n) => {
   const lang = i18n.language === 'en' ? 'si' : 'en';
@@ -48,42 +44,25 @@ export const onClickChangeLanguage = async (i18n) => {
   localStorage.setItem('language', lang);
 };
 
+export interface UserDetailsComponentProps {}
+
 const UserDetailsComponent = () => {
   const { name, id, role } = useUserContext() ?? {};
   const { isDesktop } = useWindowDimensions();
   const { t, i18n } = useTranslation();
 
-  const navigate = useNavigate();
   const logoutLocal = async () => {
-    if(id) {
-      // Process Logout
-      // navigate('/login');
-    } else {
-      navigate('/login');
-    }
+    await AuthService.logout();
   };
 
   const { isMobile } = useWindowDimensions();
   const [open, setOpen] = useState(false);
-  const { mode, set } = useTheme();
-  
+  const { mode } = useTheme();
+
   const menu = (
     <Menu>
-      {name && (
-        <Menu.Item
-          key="0"
-          disabled
-          style={{
-            cursor: 'initial',
-            color: mode === 'dark' ? 'white' : 'rgba(0, 0, 0, 0.88)',
-          }}
-          icon={role === Role.ADMIN ? <AdminIcon className="mr-2" /> : <UserOutlined />}
-        >
-          {name}
-        </Menu.Item>
-      )}
+      <UserMenu key={0} />
       <DarkModeMenuItem key={1} />
-
       <Menu.Item
         key={2}
         onClick={() => onClickChangeLanguage(i18n)}
@@ -91,8 +70,8 @@ const UserDetailsComponent = () => {
       >
         {t(translations.str.language)} {i18n.language.toUpperCase()}
       </Menu.Item>
-      <Menu.Item key={3} icon={id ? <LogoutOutlined />: <LoginOutlined />} onClick={logoutLocal}>
-        {id ? t(translations.str.logout) : t(translations.str.login)}
+      <Menu.Item key={3} icon={<LogoutOutlined />} onClick={logoutLocal}>
+        {t(translations.str.logout)}
       </Menu.Item>
     </Menu>
   );
@@ -118,3 +97,21 @@ const UserDetailsComponent = () => {
 };
 
 export default UserDetailsComponent;
+
+const UserMenu: React.FC<any> = (props) => {
+  const { mode } = useTheme();
+  const { name, orgId, id, role } = useUserContext() ?? {};
+  return (
+    <Menu.Item
+      {...props}
+      disabled
+      style={{
+        cursor: 'initial',
+        color: mode === 'dark' ? 'white' : 'rgba(0, 0, 0, 0.88)',
+      }}
+      icon={role === Role.ADMIN ? <AdminIcon className="mr-2" /> : <UserOutlined />}
+    >
+      {name} : {orgId}
+    </Menu.Item>
+  );
+};

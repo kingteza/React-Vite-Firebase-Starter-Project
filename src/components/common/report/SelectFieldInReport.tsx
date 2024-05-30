@@ -19,10 +19,11 @@ export const SelectFieldInReport: FC<{
   mode?: 'multiple' | 'tags' | undefined;
   name: string;
   label: string;
+  className?: string;
   required?: boolean;
   onSelect?: (val: any) => void;
   items: ReportSelectFieldItems[];
-}> = ({ onSelect, label, required, name, mode, items }) => {
+}> = ({ className, onSelect, label, required, name, mode, items }) => {
   const form = Form.useFormInstance();
   const [first, setFirst] = useState(true);
   useEffect(() => {
@@ -40,6 +41,7 @@ export const SelectFieldInReport: FC<{
       required={required}
       label={label}
       mode={mode}
+      className={className}
       name={name}
       onSelect={onSelect}
       items={items}

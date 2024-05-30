@@ -4,13 +4,14 @@
 ***************************************************************************** */
 
 import { LoadingOutlined } from '@ant-design/icons';
-import { Form, FormItemProps, Input } from 'antd';
+import { Form, FormItemProps, Input, Tooltip } from 'antd';
 import { SizeType } from 'antd/es/config-provider/SizeContext';
 import { FormInstance } from 'antd/lib/form/Form';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
+import TooltipComponent from '../tooltip/TooltipComponent';
 
 export interface TextFieldProps extends FormItemProps<any> {
   type?: any;
@@ -68,33 +69,30 @@ const TextField: React.FC<TextFieldProps> = ({
   inputRef,
   status,
   autoFocus,
-  onChange, 
+  onChange,
+  tooltip,
   ...props
 }) => {
   const { t } = useTranslation();
 
-  const r = useMemo(
-    () => {
-      const list = [
-        ...rules,
-        {
-          required,
-          message: `${label ?? placeholder ?? ''} ${t(
-            translations.err.validation.required
-          )}`,
-        },
-      ];
-      if(type === 'email'){
-        list.push({
-          type: 'email',
-          message: t(translations.err.validation.invalidEmail),
-          
-        });
-      }
-      return list;
-    },
-    [rules, required, label, placeholder, t, type]
-  );
+  const r = useMemo(() => {
+    const list = [
+      ...rules,
+      {
+        required,
+        message: `${label ?? placeholder ?? ''} ${t(
+          translations.err.validation.required,
+        )}`,
+      },
+    ];
+    if (type === 'email') {
+      list.push({
+        type: 'email',
+        message: t(translations.err.validation.invalidEmail),
+      });
+    }
+    return list;
+  }, [rules, required, label, placeholder, t, type]);
 
   const inputProps = {
     disabled: disabled,
@@ -105,7 +103,7 @@ const TextField: React.FC<TextFieldProps> = ({
     addonBefore,
     ref: inputRef,
     onBlur,
-    addonAfter:loading ? <LoadingOutlined /> : addonAfter,
+    addonAfter: loading ? <LoadingOutlined /> : addonAfter,
     status,
     size: size,
     autoComplete: autoComplete,
@@ -115,9 +113,11 @@ const TextField: React.FC<TextFieldProps> = ({
   };
   const Component = type == 'password' ? Input.Password : Input;
   return (
-    <Form.Item  {...props} label={label} rules={r}>
-      <Component {...(inputProps as any)} />
-    </Form.Item>
+    <TooltipComponent title={tooltip as any}>
+      <Form.Item {...props} label={label} rules={r}>
+        <Component {...(inputProps as any)} />
+      </Form.Item>
+    </TooltipComponent>
   );
 };
 
