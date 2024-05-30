@@ -12,6 +12,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useState,
 } from 'react';
 
 import ModalProvider from './ModalProvider';
@@ -41,12 +42,11 @@ const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     // https://stackoverflow.com/questions/65940522/how-do-i-switch-to-chromes-dark-scrollbar-like-github-does
+    document.documentElement.style.display = 'none';
     const isDark = mode === 'dark';
     document.documentElement.setAttribute('data-color-scheme', isDark ? 'dark' : 'light');
-    document.documentElement.classList.add(mode);
-    return () => {
-      document.documentElement.classList.remove(mode);
-    };
+    document.body.clientWidth;
+    document.documentElement.style.display = '';
   }, [mode]);
 
   const getColor = useCallback(
@@ -74,6 +74,7 @@ const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
         token: {
           colorPrimary: '#0059ff',
         },
+        hashed: false,
       }}
     >
       <ThemeContext.Provider
@@ -92,6 +93,7 @@ const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
 };
 
 const TempChild: FC<PropsWithChildren> = ({ children }) => {
+  ModalProvider();
   const { mode } = useTheme();
 
   useEffect(() => {
@@ -103,7 +105,6 @@ const TempChild: FC<PropsWithChildren> = ({ children }) => {
     };
   }, [mode]);
 
-  ModalProvider();
   return children;
 };
 

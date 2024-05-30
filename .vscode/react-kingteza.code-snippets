@@ -25,20 +25,6 @@
     "description": "Use Navigation",
     "scope": "typescriptreact"
   },
-  "dispatch": {
-    "prefix": "useAppDispatch()",
-
-    "body": ["const dispatch = useAppDispatch${1:}();\n"],
-    "description": "Use Navigation",
-    "scope": "typescriptreact"
-  },
-  "useAppSelector": {
-    "prefix": "useAppSelector()",
-
-    "body": ["const state = useAppSelector${1:}((s) => ${2:});\n"],
-    "description": "Use Navigation",
-    "scope": "typescriptreact"
-  },
   "useOrgContext": {
     "prefix": "useOrgContext()",
     "body": ["const { orgId } = useOrgContext${1:}();\n"],

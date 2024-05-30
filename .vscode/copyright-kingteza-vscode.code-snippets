@@ -1,7 +1,6 @@
 {
 	"Print to console": {
 		"prefix": "copyright",
-		
 		"body": [
 			"/* *****************************************************************************\n Copyright (c) 2020-2024 Kingteza and/or its affiliates. All rights reserved.\n KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.\n***************************************************************************** */\n"
 		],
