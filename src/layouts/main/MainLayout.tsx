@@ -14,7 +14,7 @@ import { useUserContext, withCurrentUserContext } from 'context/UserContext';
 import useWindowDimensions from 'context/WindowDimension';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { hasAccess } from 'util/AccessUtil';
 
 interface SideBarItem {

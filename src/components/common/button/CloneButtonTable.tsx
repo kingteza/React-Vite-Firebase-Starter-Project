@@ -4,7 +4,6 @@
 ***************************************************************************** */
 
 import { CopyOutlined } from '@ant-design/icons';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';

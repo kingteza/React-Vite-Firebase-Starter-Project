@@ -4,7 +4,7 @@
 ***************************************************************************** */
 
 import { Tag } from 'antd';
-import React, { FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type StatusTagProps = {
@@ -12,9 +12,7 @@ type StatusTagProps = {
   value: string;
   clickable?: boolean;
   onClick?: () => void;
-  colorFunction?: (
-    val
-  ) => { color?: string; text?: string; icon?: ReactElement };
+  colorFunction?: (val) => { color?: string; text?: string; icon?: ReactElement };
 };
 const StatusTag: FC<StatusTagProps> = ({
   onClick,

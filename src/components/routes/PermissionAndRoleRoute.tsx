@@ -5,7 +5,7 @@
 
 import Permission from 'constants/user-roles/permission.enum';
 import { useUserContext } from 'context/UserContext';
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Role from '../../constants/role.enum';

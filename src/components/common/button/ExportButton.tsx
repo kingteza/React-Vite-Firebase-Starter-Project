@@ -1,6 +1,6 @@
 import { ExportOutlined } from '@ant-design/icons';
 import { translations } from 'config/localization/translations';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ButtonComponent from './Button';

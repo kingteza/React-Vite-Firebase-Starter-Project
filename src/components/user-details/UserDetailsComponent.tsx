@@ -9,16 +9,15 @@ import {
   TranslationOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Button, Dropdown, Menu, Typography } from 'antd';
+import { Button, Dropdown, Typography } from 'antd';
 import UserAvatar from 'components/common/avatar/UserAvatar';
-import ButtonComponent from 'components/common/button/Button';
 import AdminIcon from 'components/icons/AdminIcon';
 import { translations } from 'config/localization/translations';
 import { useTheme } from 'config/theme/ThemeProvider';
 import Role from 'constants/role.enum';
 import { useUserContext } from 'context/UserContext';
 import useWindowDimensions from 'context/WindowDimension';
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AuthService from 'services/AuthService';
 

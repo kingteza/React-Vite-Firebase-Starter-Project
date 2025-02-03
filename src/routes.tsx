@@ -4,14 +4,13 @@ KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 /* eslint-disable simple-import-sort/imports */
 
-import React from 'react';
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement } from 'react';
 import LoginScreen from 'screens/auth/LoginScreen';
 
+import Permission from 'constants/user-roles/permission.enum';
+import DashboardScreen from 'screens/dashboard/DashboardScreen';
 import Role from './constants/role.enum';
 import MainLayout from './layouts/main/MainLayout';
-import DashboardScreen from 'screens/dashboard/DashboardScreen';
-import Permission from 'constants/user-roles/permission.enum';
 
 /**
  * defining the routes and its layout. Inspired by a Github

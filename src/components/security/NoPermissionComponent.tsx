@@ -4,12 +4,10 @@
 ***************************************************************************** */
 
 import { Result } from 'antd';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
 import { translations } from '../../config/localization/translations';
-import ButtonComponent from '../common/button/Button';
 
 const NoPermissionComponent = () => {
   const { t } = useTranslation();

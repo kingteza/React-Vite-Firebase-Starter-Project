@@ -1,7 +1,6 @@
 import './index.css';
 
 import { useCallback, useMemo } from 'react';
-import React from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import PermissionAndRoleRoute from './components/routes/PermissionAndRoleRoute';

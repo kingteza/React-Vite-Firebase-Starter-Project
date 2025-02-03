@@ -3,8 +3,8 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { Form, InputNumber, Tooltip } from 'antd';
-import React, { forwardRef, ReactNode, useMemo } from 'react';
+import { Form, InputNumber } from 'antd';
+import { forwardRef, ReactNode, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
@@ -91,7 +91,7 @@ const NumberTextField = forwardRef<HTMLInputElement, NumberTextFieldProps>(funct
           onPressEnter={(e) => onEnterInternalTextField(e, nextFocus, form, onEnter)}
           className="max-width"
           // type="number"
-          min={min === null ? undefined : min ?? 0}
+          min={min === null ? undefined : (min ?? 0)}
           max={max}
           size={size}
           formatter={

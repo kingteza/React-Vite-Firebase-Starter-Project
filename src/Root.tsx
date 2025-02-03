@@ -7,7 +7,7 @@ import 'config/localization/i18n';
 
 import App from 'App';
 import ThemeProvider from 'config/theme/ThemeProvider';
-import React, { FC } from 'react';
+import type { FC } from 'react';
 
 /**
  * This is where we define all root hook providers and context providers

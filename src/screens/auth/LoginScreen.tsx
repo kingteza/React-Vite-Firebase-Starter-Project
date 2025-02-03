@@ -3,11 +3,11 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { Layout, message } from 'antd';
+import { Layout } from 'antd';
 import Form from 'antd/lib/form/Form';
 import ButtonComponent from 'components/common/button/Button';
 import { translations } from 'config/localization/translations';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import AuthService from 'services/AuthService';

@@ -4,7 +4,6 @@
 ***************************************************************************** */
 
 import { Text } from 'components/common/text';
-import React, { useEffect, useState } from 'react';
 
 const DashboardScreen = () => {
   return (

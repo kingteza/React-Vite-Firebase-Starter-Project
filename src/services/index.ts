@@ -4,7 +4,6 @@
 ***************************************************************************** */
 import.meta.hot;
 import { Axios, AxiosError, AxiosRequestConfig } from 'axios';
-import { auth } from 'config/firebase/FirebaseConfig';
 
 import ErrorCode from './ErrorCode';
 
@@ -43,7 +42,7 @@ export const handleResponseError = async (
   let data: any = error.response?.data ?? '{}';
   data = typeof data === 'string' ? JSON.parse(data) : data;
   console.error(data);
-  if(error.response?.status === 401) {
+  if (error.response?.status === 401) {
     // await AuthService.logout();
   }
   const reject = {

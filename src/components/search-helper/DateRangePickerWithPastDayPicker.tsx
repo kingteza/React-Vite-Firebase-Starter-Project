@@ -9,7 +9,7 @@ import DatePickerComponent, {
 } from 'components/common/DatePicker/DatePicker';
 import { translations } from 'config/localization/translations';
 import dayjs, { Dayjs } from 'dayjs';
-import React, { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 enum DateRangePickerOptions {

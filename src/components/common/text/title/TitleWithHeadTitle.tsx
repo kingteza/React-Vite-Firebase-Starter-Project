@@ -4,7 +4,7 @@
 ***************************************************************************** */
 
 import { Typography } from 'antd';
-import React, { CSSProperties, FC, useEffect } from 'react';
+import { CSSProperties, FC, useEffect } from 'react';
 
 const { Title } = Typography;
 const TitleWithHeadTitle: FC<{

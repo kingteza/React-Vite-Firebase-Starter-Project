@@ -3,10 +3,10 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { ArrowLeftOutlined, LeftOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useHtmlHeader } from 'context/HtmlHeaderContext';
-import React, { FC, PropsWithChildren, useCallback, useEffect } from 'react';
+import { FC, PropsWithChildren, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import ButtonComponent from '../button/Button';
@@ -60,7 +60,11 @@ const PageHeaderComponent: FC<PropsWithChildren<PageHeaderComponentProps>> = ({
           />
         )}
         {title && (
-          <Typography.Title style={{ paddingTop: 0.5, paddingBottom: 0 }} className='my-0' level={5}>
+          <Typography.Title
+            style={{ paddingTop: 0.5, paddingBottom: 0 }}
+            className="my-0"
+            level={5}
+          >
             {title}
           </Typography.Title>
         )}

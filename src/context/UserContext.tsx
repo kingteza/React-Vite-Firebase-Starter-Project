@@ -4,7 +4,6 @@
 ***************************************************************************** */
 
 import LoadingIndicator from 'components/common/loading/LoadingIndicator';
-import { onAuthStateChanged } from 'firebase/auth';
 import UserPrincipal from 'models/UserPrincipal';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -40,11 +39,11 @@ export const withCurrentUserContext = (Component) => (props) => {
     //     navigate('/login');
     //   }
     // });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <UserContext.Provider value={{...currentUser as any, loading}}>
+    <UserContext.Provider value={{ ...(currentUser as any), loading }}>
       {loading ? <LoadingIndicator loading={loading} /> : <Component {...props} />}
     </UserContext.Provider>
   );

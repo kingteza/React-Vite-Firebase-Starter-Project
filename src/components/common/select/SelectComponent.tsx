@@ -3,23 +3,14 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import {
-  ConfigProvider,
-  Form,
-  FormItemProps,
-  Select,
-  SelectProps,
-  Spin,
-  Tooltip,
-} from 'antd';
+import { ConfigProvider, Form, FormItemProps, Select, SelectProps, Spin } from 'antd';
 import { RefSelectProps } from 'antd/lib/select';
-import React, { ReactElement, useCallback } from 'react';
+
+import { ReactElement, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
 import TooltipComponent from '../tooltip/TooltipComponent';
-
-
 
 export type SelectTagRenderProps = SelectProps['tagRender'];
 
@@ -112,16 +103,20 @@ function SelectComponent<T = any>({
               filterOption ??
               ((input, option) => {
                 try {
-                  const opFromDiv = (option?.children as any)?.props?.dangerouslySetInnerHTML?.__html;
-                  
+                  const opFromDiv = (option?.children as any)?.props
+                    ?.dangerouslySetInnerHTML?.__html;
+
                   // Split the input into terms based on spaces
                   const terms = input.toLowerCase().split(/\s+/);
 
                   // Get the option's children and value as lowercase strings
                   const text = (option?.children as any as string) ?? '';
-                  const optionText = typeof text === 'string' ? (
-                    text
-                  ).toLowerCase() : typeof opFromDiv === 'string' ? opFromDiv.toLowerCase() : '';
+                  const optionText =
+                    typeof text === 'string'
+                      ? text.toLowerCase()
+                      : typeof opFromDiv === 'string'
+                        ? opFromDiv.toLowerCase()
+                        : '';
                   const optionValue = (option?.value?.toString() ?? '').toLowerCase();
                   // Check if every term matches either the optionText or optionValue
                   const optionWithoutSpaces = optionText.replace(/\s/g, '');
@@ -140,7 +135,9 @@ function SelectComponent<T = any>({
             }
             dropdownRender={dropdownRender}
           >
-            {children === null ? undefined : children ?? (items && items?.map(itemBuilder ?? _itemBuilder))}
+            {children === null
+              ? undefined
+              : (children ?? (items && items?.map(itemBuilder ?? _itemBuilder)))}
           </Select>
         </Form.Item>
       </TooltipComponent>

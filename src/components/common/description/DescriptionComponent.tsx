@@ -4,8 +4,7 @@
 ***************************************************************************** */
 
 import { Divider } from 'antd';
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { FC } from 'react';
 
 interface DescriptionComponentProps {
   title: string;

@@ -3,8 +3,8 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import {List } from 'antd';
-import React, { FC, PropsWithChildren } from 'react';
+import { List } from 'antd';
+import { FC, PropsWithChildren } from 'react';
 
 const Meta = List.Item.Meta;
 const Item = List.Item;

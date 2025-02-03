@@ -11,9 +11,7 @@ import {
   RotateRightOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
-import { Form, FormItemProps } from 'antd';
-import { Modal } from 'antd';
-import { Upload, UploadProps } from 'antd';
+import { Form, FormItemProps, Modal, Upload, UploadProps } from 'antd';
 import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import React, {
   FC,
@@ -24,9 +22,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-const FormItem = Form.Item;
 import { Cropper, ReactCropperElement } from 'react-cropper';
 import { useTranslation } from 'react-i18next';
+const FormItem = Form.Item;
 
 import { translations } from '../../../config/localization/translations';
 import ImageUtil from '../../../util/ImageUtil';
@@ -106,11 +104,11 @@ const ImagePicker: FC<Props> = ({
   const [previewTitle, setPreviewTitle] = React.useState('');
   const [previewImage, setPreviewImage] = React.useState('');
   const [previewVisible, setPreviewVisible] = React.useState(false);
-  const fileRef = useRef<RcFile>();
-  const cropper = useRef<ReactCropperElement>();
+  const fileRef = useRef<RcFile>(null);
+  const cropper = useRef<ReactCropperElement>(null);
   const [fileList, setFileList] = useState<UploadFile<RcFile>[]>([]);
   const [preview, setPreview] = useState<string>();
-  const beforeUploadRef = useRef<UploadProps['beforeUpload']>();
+  const beforeUploadRef = useRef<UploadProps['beforeUpload']>(null);
 
   const handleCancel = () => setPreviewVisible(false);
 
@@ -175,7 +173,7 @@ const ImagePicker: FC<Props> = ({
 
   const onClickCancelCrop = () => {
     setPreview(undefined);
-    fileRef.current = undefined;
+    if (fileRef) fileRef.current = null;
   };
 
   const onChangeFile = useCallback((f) => {

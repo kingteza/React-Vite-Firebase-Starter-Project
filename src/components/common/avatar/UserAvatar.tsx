@@ -35,7 +35,7 @@ const UserAvatar: FC<UserAvatarProps> = ({
       }),
     [src, val],
   );
-  if (shouldShowNameOnly) return <>{value}</>;
+  if (shouldShowNameOnly) return <>{val}</>;
   return (
     <Tooltip title={val}>
       <Avatar draggable={false} src={image} size={size} />

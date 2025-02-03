@@ -5,7 +5,6 @@
 
 import { Steps } from 'antd';
 import React, {
-  FC,
   forwardRef,
   ReactElement,
   useCallback,
@@ -48,7 +47,16 @@ export interface WizardViewFormRef {
 
 const WizardViewForm = forwardRef<WizardViewFormRef, WizardViewFormProps>(
   (
-    { pages, onSubmit, initPosition = 0, progressDot, type, labelPlacement, className, pageStyle },
+    {
+      pages,
+      onSubmit,
+      initPosition = 0,
+      progressDot,
+      type,
+      labelPlacement,
+      className,
+      pageStyle,
+    },
     ref,
   ) => {
     const [current, setCurrent] = useState(0);

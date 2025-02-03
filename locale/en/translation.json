@@ -1,5 +1,9 @@
 {
   "str": {
+    "view": "View",
+    "refresh": "Refresh",
+    "print": "Print",
+    "clone": "Clone",
     "success": "Success",
     "error": "Error",
     "previous": "Previous",

@@ -5,7 +5,7 @@
 
 import Permission from 'constants/user-roles/permission.enum';
 import UserPrincipal from 'models/UserPrincipal';
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useState } from 'react';
 
 import Role from '../../constants/role.enum';
 import { hasAccess } from '../../util/AccessUtil';
@@ -16,7 +16,12 @@ interface AccessProps {
   permissions?: Permission | Permission[];
 }
 
-const Access: FC<PropsWithChildren<AccessProps>> = ({ permissions, children, roles = [], currentUser }) => {
+const Access: FC<PropsWithChildren<AccessProps>> = ({
+  permissions,
+  children,
+  roles = [],
+  currentUser,
+}) => {
   const [has, setHas] = useState<boolean>(true);
 
   useEffect(() => {

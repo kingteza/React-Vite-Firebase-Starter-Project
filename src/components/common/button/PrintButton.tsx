@@ -6,7 +6,7 @@
 
 import { PrinterOutlined } from '@ant-design/icons';
 import { ButtonType } from 'antd/lib/button';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
@@ -33,7 +33,7 @@ export const PrintButton: FC<{
       disabled={disabled}
       block={block}
       onClick={onClick}
-      tooltip={!(_title?.trim()) ? t(translations.str.print) : ''}
+      tooltip={!_title?.trim() ? t(translations.str.print) : ''}
       icon={<PrinterOutlined />}
     >
       {_title}

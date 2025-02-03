@@ -7,13 +7,13 @@
 import Icon from '@ant-design/icons';
 import { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import { Icon as IconifyIconComponent, IconifyIcon } from '@iconify/react';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 const getIcon = (icon: any) => (props) => {
   return <IconifyIconComponent {...props} icon={icon} />;
 };
 
-const KIcon: FC<Partial<CustomIconComponentProps> & { icon: IconifyIcon | string}> = ({
+const KIcon: FC<Partial<CustomIconComponentProps> & { icon: IconifyIcon | string }> = ({
   icon,
   ...props
 }) => {

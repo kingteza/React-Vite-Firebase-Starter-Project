@@ -3,7 +3,7 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import React, { KeyboardEvent, useCallback, useEffect } from 'react';
+import { KeyboardEvent, useCallback, useEffect } from 'react';
 
 export const useKeyPress = (
   key: string,

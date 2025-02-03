@@ -5,19 +5,18 @@
 
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { App, ConfigProvider, theme } from 'antd';
-import React, {
+import {
   createContext,
   FC,
   PropsWithChildren,
   useCallback,
   useContext,
   useEffect,
-  useState,
 } from 'react';
 
 import ModalProvider from './ModalProvider';
-const { defaultAlgorithm, darkAlgorithm } = theme;
 import './ThemeRelatedStyles.css';
+const { defaultAlgorithm, darkAlgorithm } = theme;
 
 type Mode = 'dark' | 'light';
 

@@ -4,7 +4,7 @@
 ***************************************************************************** */
 
 import { ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Result, Spin } from 'antd';
+import { Result } from 'antd';
 import { translations } from 'config/localization/translations';
 import { t } from 'i18next';
 import React, { FC, PropsWithChildren } from 'react';
@@ -56,14 +56,14 @@ const WizardResult: FC<
         loading
           ? undefined
           : success
-          ? 'success'
-          : error
-          ? ['403', '404', '500'].includes(error?.code)
-            ? error.code
+            ? 'success'
             : error
-            ? 'error'
-            : undefined
-          : undefined
+              ? ['403', '404', '500'].includes(error?.code)
+                ? error.code
+                : error
+                  ? 'error'
+                  : undefined
+              : undefined
       }
       title={
         loading ? loadingTitle : success ? successTitle : error ? errorTitle : undefined
@@ -73,12 +73,12 @@ const WizardResult: FC<
         loading
           ? loadingMessage
           : success
-          ? successMessage
-          : error
-          ? typeof errorMessage === 'function'
-            ? errorMessage() ?? t(translations.err.save)
-            : errorMessage ?? t(translations.err.save)
-          : undefined
+            ? successMessage
+            : error
+              ? typeof errorMessage === 'function'
+                ? (errorMessage() ?? t(translations.err.save))
+                : (errorMessage ?? t(translations.err.save))
+              : undefined
       }
       extra={[
         success ? (
