@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -28,7 +28,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended', // Make sure this is always the last element in the array.
+    'plugin:prettier/recommended',
   ],
   plugins: ['simple-import-sort', 'prettier', 'react-hooks'],
   rules: {
@@ -38,11 +38,24 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': ['off', {}],
     'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
     'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/no-autofocus': 0,
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'simple-import-sort/imports': 'error',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          ['^@?\\w'],
+          ['^@/'],
+          ['^\\u0000'],
+          ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+          ['^.+\\.s?css$'],
+        ],
+      },
+    ],
     'simple-import-sort/exports': 'error',
     'jsx-a11y/anchor-is-valid': [
       'error',

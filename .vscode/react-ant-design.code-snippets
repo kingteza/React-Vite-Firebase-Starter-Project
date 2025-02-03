@@ -1,0 +1,27 @@
+{
+  "useForm": {
+    "prefix": "useForm",
+    "body": ["const [form] = Form${1:}.useForm();"],
+    "description": "useForm"
+  },
+  "Generate Icon": {
+    "prefix": "genIcon",
+    "body": [
+
+      "import { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';",
+      "import Icon from '@ant-design/icons';",
+      "${1:}",
+      "",
+      "const Icon0 = ${2:}",
+      "",
+      "export default (props: Partial<CustomIconComponentProps>) => {",
+      "  return (",
+      "    <Icon component={Icon0} {...props} />",
+      "  )",
+      "}",
+      ""
+    ],
+    "description": "Generate Icon"
+  }
+}
+

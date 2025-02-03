@@ -7,9 +7,11 @@ import { Text } from 'components/common/text';
 import React, { useEffect, useState } from 'react';
 
 const DashboardScreen = () => {
-  return <div>
-    <Text>This is the dashboard</Text>
-  </div>;
+  return (
+    <div>
+      <Text className="text-center">This is the dashboard</Text>
+    </div>
+  );
 };
 
 export default DashboardScreen;

@@ -9,7 +9,6 @@ import ButtonComponent from 'components/common/button/Button';
 import UserDetailsComponent from 'components/user-details/UserDetailsComponent';
 import useWindowDimensions from 'context/WindowDimension';
 import React, { FC, ReactElement, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface Props {
   title: string;
