@@ -16,5 +16,6 @@
   },
   "eslint.options": {
     "configFile": ".eslintrc.mjs"
-  }
+  },
+  "i18next.i18nPaths": "/Users/pandukanandara/Documents/kingteza/Template/React-Vite-Firebase-Starter-Project/locale"
 }

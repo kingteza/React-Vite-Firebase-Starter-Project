@@ -7,6 +7,6 @@ import { useMediaQuery } from 'react-responsive';
 
 export default function useWindowDimensions() {
   const isDesktop = useMediaQuery({ minWidth: 768 });
-  const isMobile = useMediaQuery({ maxWidth: 767 })
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   return { isDesktop, isMobile };
 }

@@ -49,14 +49,17 @@ const MainLayout = () => {
     (items: SideBarItem[], uniqueKey: any) => {
       return items
         .filter(({ permissions, roles }) => hasAccess(permissions, roles, user))
-        .map(({ icon, label, link, sub }, i) => (
-          <React.Fragment key={link + ` ${uniqueKey}${i}`}>
-            {sub ? (
-              <Menu.SubMenu icon={icon} title={t(label)}>
+        .map(({ icon, label, link, sub }, i) => {
+          const key = link + ` ${uniqueKey}${i}`;
+          if (sub) {
+            return (
+              <Menu.SubMenu key={key} icon={icon} title={t(label)}>
                 {renderMenu(sub, `${uniqueKey}${i}`)}
               </Menu.SubMenu>
-            ) : (
-              <Menu.Item key={link} icon={icon}>
+            );
+          } else {
+            return (
+              <Menu.Item key={key} icon={icon}>
                 {link ? (
                   <Link to={link} className="no-style-a">
                     {t(label)}
@@ -65,9 +68,9 @@ const MainLayout = () => {
                   t(label)
                 )}
               </Menu.Item>
-            )}
-          </React.Fragment>
-        ));
+            );
+          }
+        });
     },
     [t, user],
   );
