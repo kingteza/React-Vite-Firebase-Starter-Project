@@ -1,4 +1,4 @@
-@import 'bootstrap-css-only/css/bootstrap.min.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
 @import './style/index.css';
 @tailwind base;
 @tailwind components;
@@ -286,6 +286,6 @@ pre {
   margin-left: 0 !important;
 }
 
-.full-height-sider .ant-layout-sider-children  {
+.full-height-sider .ant-layout-sider-children {
   height: 100%;
 }

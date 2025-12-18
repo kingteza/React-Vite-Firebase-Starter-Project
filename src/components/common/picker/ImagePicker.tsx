@@ -3,8 +3,6 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import 'cropperjs/dist/cropper.css';
-
 import {
   LoadingOutlined,
   RotateLeftOutlined,
@@ -24,6 +22,8 @@ import React, {
 } from 'react';
 import { Cropper, ReactCropperElement } from 'react-cropper';
 import { useTranslation } from 'react-i18next';
+
+import 'cropperjs/dist/cropper.css';
 const FormItem = Form.Item;
 
 import { translations } from '../../../config/localization/translations';

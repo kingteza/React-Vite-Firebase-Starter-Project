@@ -14,8 +14,6 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "eslint.options": {
-    "configFile": ".eslintrc.mjs"
-  },
+  "eslint.validate": ["javascript", "javascriptreact", "html", "typescriptreact"],
   "i18next.i18nPaths": "/Users/pandukanandara/Documents/kingteza/Template/React-Vite-Firebase-Starter-Project/locale"
 }

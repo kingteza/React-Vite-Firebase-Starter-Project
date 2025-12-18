@@ -1,5 +1,6 @@
 {
   "str": {
+    "theme": "Theme",
     "view": "View",
     "refresh": "Refresh",
     "print": "Print",
@@ -50,6 +51,11 @@
     "fileUploadMessage2": "Click to Upload"
   },
   "type": {
+    "theme": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
     "dateRangePickerOptions": {
       "TODAY": "Today",
       "YESTERDAY": "Yesterday",

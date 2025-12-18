@@ -4,7 +4,7 @@
 ***************************************************************************** */
 import { Button, ButtonProps, Tooltip } from 'antd';
 import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 interface ButtonComponentProps extends ButtonProps {
   to?: string | number;
@@ -30,7 +30,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
         {...props}
       />
     ),
-    [className, navigate, onClick, props, to]
+    [className, navigate, onClick, props, to],
   );
   return tooltip ? <Tooltip title={tooltip}>{btn}</Tooltip> : btn;
 };

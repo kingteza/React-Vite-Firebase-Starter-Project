@@ -7,6 +7,7 @@ import { EyeOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
+
 import ButtonComponent from './Button';
 
 interface Props<T> {

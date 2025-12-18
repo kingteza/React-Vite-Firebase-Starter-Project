@@ -1,9 +1,10 @@
-import './index.css';
-import './config/localization/i18n';
-
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Root from 'Root';
-import React from 'react';
+
+import './config/localization/i18n';
+
+import './index.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);

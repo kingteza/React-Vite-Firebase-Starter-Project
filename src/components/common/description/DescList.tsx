@@ -5,11 +5,15 @@
 
 import { Descriptions } from 'antd';
 import { DescriptionsProps } from 'antd/lib/descriptions';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 
 import NumberUtil from '../../../util/NumberUtil';
 
-export type DescPropsNullable = { label?: string | React.ReactElement; value?: any; noFormatting?: boolean };
+export type DescPropsNullable = {
+  label?: string | React.ReactElement;
+  value?: any;
+  noFormatting?: boolean;
+};
 
 export type DescProps = { label?: string; value: any; noFormatting?: boolean };
 export interface DescListProps extends DescriptionsProps {

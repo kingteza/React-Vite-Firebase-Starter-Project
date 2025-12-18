@@ -8,7 +8,9 @@ import { Text } from 'components/common/text';
 const DashboardScreen = () => {
   return (
     <div>
-      <Text className="text-center">This is the dashboard</Text>
+      <Text className="text-center text-green-700 dark:text-red-500">
+        This is the dashboard
+      </Text>
     </div>
   );
 };

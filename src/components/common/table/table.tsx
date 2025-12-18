@@ -2,7 +2,7 @@
  Copyright (c) 2020-2021 KINGTEZA and/or its affiliates. All rights reserved.
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
- 
+
 import { Table } from 'antd';
 import { ColumnsType, TableProps } from 'antd/lib/table';
 import React, { useMemo } from 'react';
@@ -11,7 +11,7 @@ const PageConstant = {
   SIZE: 10,
 };
 
-export type TableComponentColumnProp<T>  = {
+export type TableComponentColumnProp<T> = {
   dataIndex?: keyof T;
   render?: (value: any, record: T, index: number) => React.ReactNode;
   hidden?: boolean;
@@ -50,11 +50,15 @@ function TableComponent<T>({
       rowKey={rowKey as any}
       onRow={onRow as any}
       {...(props as any)}
-      scroll={scroll ? scroll : {
-        // y: `calc(100vh - ${minusHeight ?? 0}px)`,
-        x: true,
-        // scrollToFirstRowOnChange: true,
-      }}
+      scroll={
+        scroll
+          ? scroll
+          : {
+              // y: `calc(100vh - ${minusHeight ?? 0}px)`,
+              x: true,
+              // scrollToFirstRowOnChange: true,
+            }
+      }
       pagination={
         pagination && {
           ...pagination,

@@ -5,7 +5,7 @@
 
 import { Result } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { translations } from '../../config/localization/translations';
 

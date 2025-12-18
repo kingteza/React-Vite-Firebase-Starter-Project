@@ -9,6 +9,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
+
 import ButtonComponent from './Button';
 
 export const NewButton: FC<{

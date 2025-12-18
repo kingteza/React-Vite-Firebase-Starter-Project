@@ -3,42 +3,46 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { createAvatar } from '@dicebear/avatars';
-import * as style from '@dicebear/avatars-initials-sprites';
+import { UserOutlined } from '@ant-design/icons';
+import { initials } from '@dicebear/collection';
+import { createAvatar } from '@dicebear/core';
 import { Avatar, Tooltip } from 'antd';
-import { AvatarSize } from 'antd/es/avatar/AvatarContext';
-import UserModel from 'models/user/User';
-import React, { FC, useMemo } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 interface UserAvatarProps {
-  value: string | UserModel;
+  value: string;
   src?: string;
   shouldShowNameOnly?: boolean;
-  size?: AvatarSize;
 }
-const UserAvatar: FC<UserAvatarProps> = ({
-  value,
-  src,
-  shouldShowNameOnly,
-  size = 'large',
-}) => {
-  const val = useMemo(() => (typeof value === 'string' ? value : value?.name), [value]);
+const UserAvatar: FC<UserAvatarProps> = ({ value, src, shouldShowNameOnly }) => {
+  const [_value, set_value] = useState<string>();
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const image = useMemo(
-    () =>
-      src ??
-      createAvatar(style, {
-        seed: val,
-        dataUri: true,
-        // ... and other options
-      }),
-    [src, val],
-  );
-  if (shouldShowNameOnly) return <>{val}</>;
+  useEffect(() => {
+    if (value) {
+      try {
+        const seed = value.replace(/\p{Emoji}/gu, '');
+        const rst = createAvatar(initials, {
+          seed,
+          backgroundType: ['gradientLinear'],
+          // ... and other options
+        }).toDataUri();
+        set_value(rst);
+      } catch {
+        // Ignore
+      }
+    }
+  }, [value]);
+
+  if (shouldShowNameOnly) return <>{value}</>;
+
   return (
-    <Tooltip title={val}>
-      <Avatar draggable={false} src={image} size={size} />
+    <Tooltip title={value}>
+      <Avatar
+        draggable={false}
+        src={src ?? _value}
+        size="large"
+        icon={!(src ?? _value) ? <UserOutlined /> : undefined}
+      />
     </Tooltip>
   );
 };

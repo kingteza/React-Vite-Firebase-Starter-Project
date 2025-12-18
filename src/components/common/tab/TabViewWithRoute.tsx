@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 
-const { Content }= Layout;
+const { Content } = Layout;
 
 interface TabViewWithRouteProps {
   initialKey?: string;

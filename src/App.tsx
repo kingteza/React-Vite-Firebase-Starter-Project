@@ -1,10 +1,10 @@
-import './index.css';
-
 import { useCallback, useMemo } from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import PermissionAndRoleRoute from './components/routes/PermissionAndRoleRoute';
 import routes, { AppRoute } from './routes';
+
+import './index.css';
 
 function App() {
   const generateRoute = useCallback((appRoute: AppRoute, index: number) => {

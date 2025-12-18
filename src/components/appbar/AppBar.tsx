@@ -3,74 +3,100 @@
  KINGTEZA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 ***************************************************************************** */
 
-import { MenuOutlined } from '@ant-design/icons';
-import { Drawer, Layout, Menu, Typography } from 'antd';
-import ButtonComponent from 'components/common/button/Button';
+import {
+  BellOutlined,
+  CheckSquareOutlined,
+  DownOutlined,
+  EnvironmentOutlined,
+  SearchOutlined,
+  ThunderboltOutlined,
+} from '@ant-design/icons';
+import {
+  Avatar,
+  Badge,
+  Button,
+  Drawer,
+  Dropdown,
+  Input,
+  Layout,
+  Menu,
+  MenuProps,
+  Select,
+  Space,
+  theme,
+} from 'antd';
 import UserDetailsComponent from 'components/user-details/UserDetailsComponent';
 import useWindowDimensions from 'context/WindowDimension';
-import type { FC, ReactElement } from 'react';
-import { useState } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-interface Props {
+const { Search } = Input;
+const { useToken } = theme;
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+type Props = {
   title: string;
-  menu: ReactElement[];
-}
+  sidebarWidth?: number;
+} & (
+  | {
+      menu: ReactElement[];
+    }
+  | {
+      menuItems: MenuItem[];
+    }
+);
 
-const AppBar: FC<Props> = ({ title, menu }) => {
+const AppBar: FC<Props> = ({ title, sidebarWidth = 0, ...props }) => {
   const [visible, setVisible] = useState(false);
+  const { isMobile } = useWindowDimensions();
+  const { token } = useToken();
 
-  const { isDesktop = true, isMobile } = useWindowDimensions();
+  // Mock data - replace with actual data from your context/API
+  const taskCount = 12;
 
   return (
     <>
       <Layout.Header
-        className="site-layout-background layout-header navbar pl-2"
+        className="site-layout-background layout-header navbar"
         style={{
           position: 'fixed',
-          zIndex: 1,
-          width: '100%',
-          borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+          zIndex: 200,
+          left: sidebarWidth,
+          width: `calc(100vw - ${sidebarWidth}px)`,
+          borderBottom: `0px solid ${token.colorBorderSecondary}`,
+          padding: isMobile ? '0 16px' : '0 24px',
+          height: '64px',
+          lineHeight: '64px',
+          transition: 'left 0.3s ease, width 0.3s ease',
         }}
       >
         <div className="d-flex align-items-center w-100">
-          {!isDesktop && (
-            <ButtonComponent
-              className="menu"
-              type="text"
-              ghost
-              icon={<MenuOutlined />}
-              onClick={() => setVisible(true)}
-            />
-          )}
-          <Typography.Title level={3} className="mb-0 pl-2 v-center-text">
-            {title}
-          </Typography.Title>
           <div style={{ flex: 1 }} />
-          <div className="ml-auto">
-            {/* <img src={'../../../'} className="logo" alt="logo" /> */}
+
+          <Space size={isMobile ? 'small' : 'middle'} className="ml-auto">
             <UserDetailsComponent />
-          </div>
+          </Space>
         </div>
       </Layout.Header>
-      {!isDesktop && (
-        <Drawer
-          className="p-0 app-bar"
-          placement="left"
-          onClose={() => setVisible(false)}
-          open={visible}
-          width={isMobile ? '75%' : undefined}
-        >
-          {/* <UserDetailsComponent /> */}
-          <Menu
-            onSelect={() => setVisible(false)}
-            mode="inline"
-            theme="light"
-            defaultSelectedKeys={['2']}
-          >
-            {menu}
-          </Menu>
-        </Drawer>
-      )}
+
+      {/* Mobile Drawer - keep existing logic */}
+      <Drawer
+        className="p-0 app-bar"
+        placement="left"
+        onClose={() => setVisible(false)}
+        width={isMobile ? '75%' : undefined}
+        open={visible}
+      >
+        <Menu
+          onSelect={() => setVisible(false)}
+          mode="inline"
+          theme="light"
+          defaultSelectedKeys={['2']}
+          items={(props as any).menuItems}
+        ></Menu>
+      </Drawer>
     </>
   );
 };

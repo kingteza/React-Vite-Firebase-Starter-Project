@@ -4,7 +4,7 @@
 ***************************************************************************** */
 
 import { ReloadOutlined } from '@ant-design/icons';
-import { ButtonType } from 'antd-button-color';
+import { ButtonProps } from 'antd';
 import { translations } from 'config/localization/translations';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,7 @@ export const RefreshButton: FC<{
   to?: string;
   onClick?: (value: boolean) => void;
   title?: string;
-  type?: ButtonType;
+  type?: ButtonProps['type'];
   block?: boolean;
   className?: string;
 }> = ({ block, className, type = 'primary', onClick, title, to }) => {

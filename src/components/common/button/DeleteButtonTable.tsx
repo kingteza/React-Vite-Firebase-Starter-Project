@@ -10,6 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
+
 import ButtonComponent from './Button';
 
 interface Props<T> {

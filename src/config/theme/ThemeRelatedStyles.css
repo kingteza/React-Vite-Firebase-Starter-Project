@@ -8,19 +8,31 @@
   background-color: #001529;
 }
 
+.dark .ant-layout-footer {
+  background: #141414;
+  color: white;
+  border-top: 1px solid #303030;
+}
+
 .dark {
   background-color: black !important;
+  --adm-color-background: #141414;
 }
 
 .light {
   background-color: #f5f5f5 !important;
+  --adm-color-background: #f5f5f5;
 }
 
 .light .ant-layout-header {
-  background: #f5f8fa !important;
+  background: #ffffff !important;
   border-bottom: 1px solid rgba(5, 5, 5, 0.06);
   border-right: 1px solid rgba(5, 5, 5, 0.06);
   color: black !important;
+}
+
+.dark .ant-layout-header {
+  background-color: rgb(20, 20, 20) !important;
 }
 
 .light .ant-layout-sider-trigger,
@@ -29,4 +41,12 @@
   border-bottom: 1px solid rgba(5, 5, 5, 0.06);
   border-right: 1px solid rgba(5, 5, 5, 0.06);
   color: black !important;
+}
+
+.dark .ant-layout-sider-trigger {
+  background-color: var(--color-bg-container) !important;
+}
+
+.light .ant-layout-sider-trigger {
+  background-color: var(--color-bg-container) !important;
 }

@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import { translations } from '../../../config/localization/translations';
 import TooltipComponent from '../tooltip/TooltipComponent';
+
 import { onEnterInternalTextField, TextFieldProps } from './TextField';
 
 interface NumberTextFieldProps extends TextFieldProps {

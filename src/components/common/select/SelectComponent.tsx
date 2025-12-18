@@ -5,7 +5,6 @@
 
 import { ConfigProvider, Form, FormItemProps, Select, SelectProps, Spin } from 'antd';
 import { RefSelectProps } from 'antd/lib/select';
-
 import { ReactElement, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
